@@ -11,7 +11,7 @@ Missing/Lista de Usuarios
 <h1> Usuarios</h1>
 <br/>
 {{ HTML::link('indexcma','Volver',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
-{{ HTML::link('users/create','Crear Usuario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
+{{ HTML::link('CrearUsuario','Crear Usuario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 <br/>
 <br/>
 <table class="table table-hover">

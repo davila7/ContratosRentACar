@@ -10,6 +10,38 @@ class UsuarioController extends BaseController
      * Show the profile for the given user.
      */
 
+    public function ListaUsuarios(){
+        $usuarios = Usuario::all();
+        return View::make('usuarios.listausuarios', array('usuarios'=>$usuarios));
+    }
+
+    public function CrearUsuarioGet(){
+        return View::make('usuarios.crearusuario');
+    }
+
+    public function CrearUsuarioPost(){
+
+        $user = new Usuario;
+        $user->usuario = Input::get("nombre");
+        $user->apellido_paterno = Input::get("apellido_paterno");
+        $user->apellido_materno = Input::get("apellido_materno");
+        $user->password = Hash::make(Input::get("password"));
+        $user->realpassword = Input::get("password");
+        $user->correo = Input::get("correo");
+        $user->esCreado = 1;
+        $user->save();
+
+        $LastInsertId = $user->id;
+
+        $perfil = new Perfiles;
+        $perfil->usuario_id = $LastInsertId;
+        $perfil->username = $user->usuario;
+        $perfil->save();
+        Auth::loginUsingId($LastInsertId);
+        return Response::json(array('isloggin'=>Auth::user()->usuario,
+        'esCreado'=>Auth::user()->esCreado,'email'=>Auth::user()->email,'avatar'=>$perfil->avatar_path));
+    }
+
     public function get_login()
     {
         return View::make('auth.login');
@@ -49,7 +81,7 @@ class UsuarioController extends BaseController
         return Response::json(array('msg'=>'Logout'));
     }
 
-    public function GetUser(){
+    public function ObtieneUserLogeado(){
         if(Auth::check()){
             $user = Usuario::find(Auth::user()->id);
             $nombre = $user->usuario;
@@ -61,22 +93,6 @@ class UsuarioController extends BaseController
             return Response::json(array('msg'=>'false'));
         }  
     }
-
-    public function showProfile($id){
-        $user = Usuario::find($id);
-
-        return View::make('usuarios.profile', array('user' => $user));
-    }
-    
-    public function ListaUsuarios(){
-        $usuarios = Usuario::all();
-        return View::make('usuarios.listausuarios', array('usuarios'=>$usuarios));
-    }
-    
-	public function get_index(){
-		$users = Usuario::all();
-		return View::make('users.index')->with('users', $users);
-	}
     
     public function post_index(){
         $credentials = array(
@@ -93,8 +109,7 @@ class UsuarioController extends BaseController
         }   
     }
 	
-    //Crea el User desde login Facebook
-	public function CreateUserEsCreado(){
+	public function EditarUsuarioPost(){
 		$user = Usuario::find(Auth::user()->id);
         $user->usuario = Input::json("usuario");
         $user->email = Input::json("email");
@@ -106,35 +121,8 @@ class UsuarioController extends BaseController
          return Response::json(array('msg'=>Auth::user()->usuario));
 	}
 
-    //Crea el User desde 0
-    public function CreateUser(){
-        $user = new Usuario;
-        $user->usuario = Input::json("nombre");
-        $user->email = Input::json("email");
-        $user->password = Hash::make(Input::json("password"));
-        $user->realpassword = Input::json("password");
-        $user->esCreado = 1;
-        $user->save();
 
-        $LastInsertId = $user->id;
 
-        $perfil = new Perfiles;
-        $perfil->usuario_id = $LastInsertId;
-        $perfil->username = $user->usuario;
-        $perfil->save();
-        Auth::loginUsingId($LastInsertId);
-        return Response::json(array('isloggin'=>Auth::user()->usuario,
-        'esCreado'=>Auth::user()->esCreado,'email'=>Auth::user()->email,'avatar'=>$perfil->avatar_path));
-    }
-
-    //Crea el User desde 0
-    public function EditarUsuario(){
-        $user = Usuario::find(Auth::user()->id);
-        $user->usuario = Input::json("usuario");
-        $user->email = Input::json("email");
-        $user->save();
-        return Response::json(array('msg'=>'ok'));
-    }
 
     //cambia la imagen del perfil
     public function CargaImagenPerfil(){
@@ -154,7 +142,7 @@ class UsuarioController extends BaseController
         return Response::json(array('msg'=>'ok'));
     }
 	
-	public function get_delete($user_id)
+	public function BorrarUsuario($user_id)
 	{
 		$user = Usuario::find($user_id);
 		
@@ -166,14 +154,7 @@ class UsuarioController extends BaseController
 		$user->delete();
 		return Redirect::to('users/listausuarios');
 	}
-    
-    public function get_listausuarios()
-	{
-        $users = Usuario::all();
-		return View::make('users.listausuarios')->with('users', $users);
-	}
-    
-    
+        
     
     public function get_update($user_id)
     {
