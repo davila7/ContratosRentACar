@@ -1,0 +1,80 @@
+
+html { height: 100% }
+
+body { 
+	height: 100%;
+    background-color: #d7ddea!important;
+}
+
+.bs-docs-nav {
+	background-color: #75CDFF!important;
+}
+
+.nav-bar-text{
+	color: #0BACC9!important;
+}
+
+.nav-bar-style{
+	
+}
+
+.progress-bar.animate {
+   width: 100%;
+}
+
+.dropdown-menu-text{
+	color: #0BACC9!important;
+}
+
+.facelogin { cursor: pointer; }
+.pointer { cursor: pointer; cursor: hand; }
+.modal-title-detalle {
+  background-color: #75CDFF!important;
+}
+
+.modal-title-borrar {
+  background-color: #FF8686;
+}
+
+.azul{
+border:1px solid #02306a;
+background-color:#23528c;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#23528c', endColorstr='#02306a');
+background: -webkit-gradient(linear, left top, left bottom, from(#23528c), to(#02306a));
+background: -moz-linear-gradient(top, #23528c, #02306a);
+color: #fff;
+}
+
+.container-maps{
+	position: relative;
+    padding-bottom: 50%; // This is the aspect ratio
+    height: 0;
+    overflow: hidden;
+}
+
+.google-maps {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+.loader{
+    position: fixed;
+    top: 150px;
+}
+
+.img-missing{
+    width: 15%;
+    height: 15%;
+}
+
+#modal-detalles .large {
+    width: 80%; /* respsonsive width */
+    margin-left:-40%; /* width/2) */ 
+}
+
+
+
+
