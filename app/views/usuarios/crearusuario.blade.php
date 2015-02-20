@@ -1,5 +1,7 @@
 @extends('layouts.layout')
 @section('head')
+{{ HTML::script('js/functions/crearusuario.js') }}
+{{ HTML::script('js/lib/jquery.ui.js') }}
 @stop
 @section('titulo')
 Missing/Lista de Usuarios
@@ -13,14 +15,14 @@ Missing/Lista de Usuarios
 {{ HTML::link('ListaUsuarios','Volver',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 <br/>
 <br/>
-{{ Form::open(array('url' => 'CrearUsuario')) }}
+{{ Form::open(array('url' => 'CrearUsuario', 'id'=>'form_usuario')) }}
 <table class="table table-hover">
 	<tr>
 		<th>
 			Nombre Usuario 
 		</th>
 		<th>
-			<input type="text" name="nombre" placeholder="Ingresar un nombre">
+			<input type="text" name="nombre" placeholder="Ingresar un nombre" required>
 		</th>
 	</tr>
 	<tr>
@@ -28,7 +30,7 @@ Missing/Lista de Usuarios
 			Apellido Paterno
 		</th>
 		<th>
-			<input type="text" name="apellido_paterno" placeholder="Ingresar un apellido paterno">
+			<input type="text" name="apellido_paterno" placeholder="Ingresar un apellido paterno" required>
 		</th>
 	</tr>
 	<tr>
@@ -36,7 +38,7 @@ Missing/Lista de Usuarios
 			Apellido Materno 
 		</th>
 		<th>
-			<input type="text" name="apellido_materno" placeholder="Ingresar un apellido materno">
+			<input type="text" name="apellido_materno" placeholder="Ingresar un apellido materno" required>
 		</th>
 	</tr>
 	<tr>
@@ -44,7 +46,7 @@ Missing/Lista de Usuarios
 			Rut 
 		</th>
 		<th>
-			<input type="text" name="rut" placeholder="Ingresar rut">
+			<input type="text" name="rut" placeholder="Ingresar rut" required>
 		</th>
 	</tr>
 	<tr>
@@ -52,7 +54,7 @@ Missing/Lista de Usuarios
 			Fecha Nacimiento 
 		</th>
 		<th>
-			<input type="text" name="fecha_nacimiento" placeholder="Ingresar un fecha nacimiento">
+			<input type="text" name="fecha_nacimiento" class="datepicker" placeholder="Ingresar un fecha nacimiento">
 		</th>
 	</tr>
 	<tr>
@@ -60,7 +62,7 @@ Missing/Lista de Usuarios
 			Dirección 
 		</th>
 		<th>
-			<input type="text" name="direccion" placeholder="Ingresar una direccion">
+			<input type="text" name="direccion" placeholder="Ingresar una direccion" >
 		</th>
 	</tr>
 	<tr>
@@ -68,7 +70,7 @@ Missing/Lista de Usuarios
 			Correo 
 		</th>
 		<th>
-			<input type="text" name="correo" placeholder="Ingresar un correo">
+			<input type="text" name="correo" placeholder="Ingresar un correo" id="correo">
 		</th>
 	</tr>
 	<tr>
@@ -88,7 +90,7 @@ Missing/Lista de Usuarios
 			Passowrd
 		</th>
 		<th>
-			<input type="text" name="password" placeholder="Ingresar un password">
+			<input type="text" name="password" placeholder="Ingresar un password" required>
 		</th>
 	</tr>
 	<tr>

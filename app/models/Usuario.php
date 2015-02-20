@@ -23,4 +23,23 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+	public function getPermiso($permiso){
+
+    	switch ($permiso) {
+    		case '1':
+    			return "Administrador";
+    			break;
+    		case '2':
+    			return "Profesor";
+    			break;
+    		case '3':
+    			return "Alumno";
+    			break;
+    		default:
+    			return "Alumno";
+    			break;
+    	}
+
+    }
+
 }

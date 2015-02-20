@@ -16,6 +16,9 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <!-- JS -->
   {{ HTML::script('js/lib/jquery.js') }}
+  {{ HTML::script('js/lib/jquery-ui.min.js') }}
+  {{ HTML::script('js/lib/jquery.validate.js') }}
+  {{ HTML::script('js/lib/additional-methods.min.js') }}
   {{ HTML::script('js/page/home.js') }}
   {{ HTML::script('js/lib/underscore.js') }}
   {{ HTML::script('js/lib/bootstrap.js') }}
@@ -36,12 +39,12 @@
   {{ HTML::style('css/bootstrap-fileupload.css'); }}
 
 <!-- script especiales -->
-  {{ HTML::script('js/yepnope.js') }}
-  {{ HTML::script('js/rulesJS.js') }}
+  {{ HTML::script('js/functions/general.js') }}
+  @yield('head')
 </head>
     <body>
       <input type="hidden" id="baseurl" value="{{ URL::to('/');}}" />
-        @section('sidebar')
+  @section('sidebar')
        <header class="navbar navbar-static-top bs-docs-nav azul" id="top" role="banner">
   <div class="container">
     <div class="navbar-header">

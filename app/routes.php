@@ -35,6 +35,9 @@ Route::get('/indexcma','HomeController@IndexCMA');
 Route::get('/ListaUsuarios','UsuarioController@ListaUsuarios');
 Route::get('/CrearUsuario','UsuarioController@CrearUsuarioGet');
 Route::post('/CrearUsuario','UsuarioController@CrearUsuarioPost');
+Route::get('/BorrarUsuario/{usuario_id}','UsuarioController@BorrarUsuarioGet');
+Route::get('/EditarUsuario/{usuario_id}','UsuarioController@EditarUsuarioGet');
+Route::post('/EditarUsuario','UsuarioController@EditarUsuarioPost');
 
 
 

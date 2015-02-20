@@ -20,26 +20,58 @@ class UsuarioController extends BaseController
     }
 
     public function CrearUsuarioPost(){
-
         $user = new Usuario;
-        $user->usuario = Input::get("nombre");
+        $user->nombre = Input::get("nombre");
         $user->apellido_paterno = Input::get("apellido_paterno");
         $user->apellido_materno = Input::get("apellido_materno");
         $user->password = Hash::make(Input::get("password"));
         $user->realpassword = Input::get("password");
+        $user->fecha_nacimiento = Input::get("fecha_nacimiento");
+        $user->rut = Input::get("rut");
+        $user->direccion = Input::get("direccion");
+        $user->id_permiso = Input::get("permiso");
         $user->correo = Input::get("correo");
-        $user->esCreado = 1;
         $user->save();
-
         $LastInsertId = $user->id;
 
-        $perfil = new Perfiles;
-        $perfil->usuario_id = $LastInsertId;
-        $perfil->username = $user->usuario;
-        $perfil->save();
-        Auth::loginUsingId($LastInsertId);
-        return Response::json(array('isloggin'=>Auth::user()->usuario,
-        'esCreado'=>Auth::user()->esCreado,'email'=>Auth::user()->email,'avatar'=>$perfil->avatar_path));
+        return Redirect::to('ListaUsuarios');
+    }
+
+    public function BorrarUsuarioGet($usuario_id){
+        $user = Usuario::find($usuario_id);
+        if(is_null($user))
+        {
+            return Redirect::to('ListaUsuarios');
+        }
+        $user->delete();
+        return Redirect::to('ListaUsuarios');
+    }
+
+    public function EditarUsuarioGet($usuario_id){
+        $user = Usuario::find($usuario_id);
+        if(is_null($user))
+        {
+            return Redirect::to('ListaUsuarios');
+        }
+        return View::make('usuarios.editarusuario')->with('user', $user);
+    }
+
+    public function EditarUsuarioPost(){
+        $user = Usuario::find(Input::get("id"));
+        $user->nombre = Input::get("nombre");
+        $user->apellido_paterno = Input::get("apellido_paterno");
+        $user->apellido_materno = Input::get("apellido_materno");
+        $user->password = Hash::make(Input::get("password"));
+        $user->realpassword = Input::get("password");
+        $user->fecha_nacimiento = Input::get("fecha_nacimiento");
+        $user->rut = Input::get("rut");
+        $user->direccion = Input::get("direccion");
+        $user->id_permiso = Input::get("permiso");
+        $user->correo = Input::get("correo");
+        $user->save();
+        $LastInsertId = $user->id;
+
+        return Redirect::to('ListaUsuarios');
     }
 
     public function get_login()
@@ -109,17 +141,7 @@ class UsuarioController extends BaseController
         }   
     }
 	
-	public function EditarUsuarioPost(){
-		$user = Usuario::find(Auth::user()->id);
-        $user->usuario = Input::json("usuario");
-        $user->email = Input::json("email");
-		$user->password = Hash::make(Input::json("password"));
-        $user->realpassword = Input::json("password");
-        $user->esCreado = 1;
-		$user->save();
-		
-         return Response::json(array('msg'=>Auth::user()->usuario));
-	}
+	
 
 
 
@@ -141,33 +163,6 @@ class UsuarioController extends BaseController
         }
         return Response::json(array('msg'=>'ok'));
     }
-	
-	public function BorrarUsuario($user_id)
-	{
-		$user = Usuario::find($user_id);
-		
-		if(is_null($user))
-		{
-			return Redirect::to('users/listausuarios');
-		}
-		
-		$user->delete();
-		return Redirect::to('users/listausuarios');
-	}
-        
-    
-    public function get_update($user_id)
-    {
-		$user = Usuario::find($user_id);
-		
-		if(is_null($user))
-		{
-			return Redirect::to('users/listausuarios');
-		}
-		
-        //return $user->nombre;
-		return View::make('users.update')->with('user', $user);
-	}
     
     public function post_update($user_id)
     {
