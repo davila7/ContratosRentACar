@@ -63,7 +63,7 @@ Missing/Lista de Usuarios
 			{{ HTML::link('users/delete/'.$user->id,'Examenes',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 		</td>
 		<td>
-			{{ HTML::link('users/delete/'.$user->id,'Horario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
+			{{ HTML::link('HorarioUsuario/'.$user->id,'Horario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 		</td>
 		<td>
 			{{ HTML::link('EditarUsuario/'.$user->id,'Editar Usuario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
