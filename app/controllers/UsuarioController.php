@@ -10,6 +10,18 @@ class UsuarioController extends BaseController
      * Show the profile for the given user.
      */
 
+    public function LoginUsuarioPost(){
+        $credentials = array(
+        'email' => Input::get('email'),
+        'password' => Input::get('password'));
+        if(Auth::attempt($credentials)){
+            return View::make('indexcma');
+        }else{
+            return View::make('indexcma');
+            //return Response::json(array('msg'=>'Credenciales no validas'),500);
+        }   
+    }
+
     public function ListaUsuarios(){
         $usuarios = Usuario::all();
         return View::make('usuarios.listausuarios', array('usuarios'=>$usuarios));
@@ -30,7 +42,7 @@ class UsuarioController extends BaseController
         $user->rut = Input::get("rut");
         $user->direccion = Input::get("direccion");
         $user->id_permiso = Input::get("permiso");
-        $user->correo = Input::get("correo");
+        $user->email = Input::get("correo");
         $user->save();
         $LastInsertId = $user->id;
 
@@ -67,7 +79,7 @@ class UsuarioController extends BaseController
         $user->rut = Input::get("rut");
         $user->direccion = Input::get("direccion");
         $user->id_permiso = Input::get("permiso");
-        $user->correo = Input::get("correo");
+        $user->email = Input::get("correo");
         $user->save();
         $LastInsertId = $user->id;
 
@@ -112,26 +124,6 @@ class UsuarioController extends BaseController
         $id = Input::get('id');
         $horario = Horario::find($id);
         $horario->delete();
-    }
-
-    public function get_login()
-    {
-        return View::make('auth.login');
-    }
-    
-    public function post_login()
-    {
-        $credentials = array(
-        'email' => Input::json('email'),
-        'password' => Input::json('password'));
-        if(Auth::attempt($credentials)){
-            return Response::json(array(
-                        'msg'=>Auth::user()->usuario,
-                        'usuario_id'=>Auth::user()->id
-                        ));
-        }else{
-        	return Response::json(array('msg'=>'Credenciales no validas'),500);
-        }   
     }
 
     public function isLoggedIn()

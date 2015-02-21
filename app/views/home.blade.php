@@ -48,49 +48,25 @@
   <!--[if lt IE 7]>
   <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
   <![endif]-->
-  <!-- Docs master nav -->
-<header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner">
-  <div class="container">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="{{ URL::to('/');}}"> 
-     PANEL DE CONTROL
-      </a>
-    </div>
-    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav navbar-right login-home">
-       <li><a class="pointer nav-bar-text">Iniciar Sesión</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right logout-home hide" ng-controller="loginController">
-        <li><a class="nav-bar-text" id="username" ></a></li>
-        <li><a class="brand"> 
-          <img class="avatar img-circle" src="img/avatar-default.jpeg" height="30px" width="30px"></a></li>
-          <li>
-            <a class="dropdown-toggle pointer" data-toggle="dropdown">
-            <img  src="img/glyphicons/png/glyphicons_136_cogwheel.png" height="25px" width="25px"/>
-            <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu">
-              <li class="pointer">
-                <a class="dropdown-menu-text" id="carga_perfil" ng-click="showModalEditarPerfil()">Editar Perfil</a>
-              </li>
-              <li class="pointer dropdown-menu-text"><a href="http://www.missing.cl" class="dropdown-menu-text">Más Información</a></li>
-              <li class="divider"></li>
-              <li><a ng-click="logout()" class="pointer dropdown-menu-text">Cerrar Sesión</a></li>
-          </ul>
-          </li>
-      </ul>
-    </nav>
-  </div>
-</header>
 <main id="content" role="main">
     <div class="container container-view">
       <div class="row">
-    <div class="col-md-6">
-      <a onclick="alert('En contrucción!')" class="btn btn-default" >CEACHEI</a>
-    </div>
-    <div class="col-md-6">
-      {{ HTML::link('indexcma','CMA',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
-    </div>
+      <div class="col-lg-12 col-lg-offset-4">
+        <div class="col-lg-3">
+        {{ Form::open(array('url' => 'LoginUsuario')) }}
+          <p class="bg-success">Iniciar Sesión</p>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" class="form-control" placeholder="Ingresar email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" class="form-control" placeholder="Ingresar Password">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        {{ Form::close() }}
+      </div>
+      </div>
     </div>
     </div>
     <input type="hidden" id="usuario_id" value="@if (Auth::check()) {{Auth::user()->id}} @endif" />

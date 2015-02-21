@@ -32,6 +32,7 @@ Route::get('/indexcma','HomeController@IndexCMA');
 
 
 //USUARIOS
+Route::post('/LoginUsuario','UsuarioController@LoginUsuarioPost');
 Route::get('/ListaUsuarios','UsuarioController@ListaUsuarios');
 Route::get('/CrearUsuario','UsuarioController@CrearUsuarioGet');
 Route::post('/CrearUsuario','UsuarioController@CrearUsuarioPost');
