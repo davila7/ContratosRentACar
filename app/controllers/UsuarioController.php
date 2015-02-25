@@ -10,6 +10,10 @@ class UsuarioController extends BaseController
      * Show the profile for the given user.
      */
 
+    public function IndexCMA(){
+            return View::make('indexcma');
+    }
+
     public function LoginUsuarioPost(){
         $credentials = array(
         'email' => Input::get('email'),

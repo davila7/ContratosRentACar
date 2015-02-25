@@ -28,7 +28,7 @@ Route::get("/", function()
 /************ RUTA CMA ***************/
 
 //INDEX
-Route::get('/indexcma','HomeController@IndexCMA');
+Route::get('/indexcma','UsuarioController@IndexCMA');
 
 
 //USUARIOS
@@ -44,6 +44,18 @@ Route::get('/GuardaHorario','UsuarioController@GuardaHorarioUsuarioGet');
 Route::get('/BorrarHorario','UsuarioController@BorrarHorarioGet');
 
 
+//EXAMENES
+Route::get('/ListaExamenes','ExamenesController@ListaExamenes');
+Route::get('/CrearExamen','ExamenesController@CrearExamenGet');
+Route::post('/CrearExamen','ExamenesController@CrearExamenPost');
+
+//PREGUNTAS
+Route::get('/ListaPreguntas','ExamenesController@ListaPreguntas');
+Route::get('/CrearPregunta','ExamenesController@CrearPreguntaGet');
+Route::post('/CrearPregunta','ExamenesController@CrearPreguntaPost');
+Route::get('/BorrarPregunta','ExamenesController@BorrarPreguntaGet');
+Route::get('/EditarPregunta/{pregunta_id}','ExamenesController@EditarPreguntaGet');
+Route::post('/EditarPregunta','ExamenesController@EditarPreguntaPost');
 
 
 

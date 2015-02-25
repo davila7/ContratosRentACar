@@ -26,7 +26,7 @@ PANEL DE CONTRO / CMA
 	</tr>
 	<tr>
     <td>
-     <a class="btn btn-default" target="_blank" alt="Examenes"><i class="fa fa-file-text"></i> Examenes</a>
+     <a href="ListaExamenes" class="btn btn-default" alt="Examenes"><i class="fa fa-file-text"></i> Examenes</a>
     </td>
 	</tr>
 	<tr>

@@ -5,15 +5,15 @@ use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
 
-class Imagenes extends Eloquent implements UserInterface, RemindableInterface {
+class Respuesta extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
+	public $table = 'respuestas';
+	
+	public function pregunta(){
+	return $this->belong_to('Pregunta');
+	}
 
-	protected $table = 'imagenes';
 
-    public function usuario()
-    {
-        return $this->belongsTo('Usuario');
-    }
 }
