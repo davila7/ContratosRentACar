@@ -20,7 +20,7 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <!-- JS -->
   {{ HTML::script('js/lib/jquery.js') }}
-    {{ HTML::script('js/page/home.js') }}
+  {{ HTML::script('js/functions/indexcma.js') }}
   {{ HTML::script('js/lib/underscore.js') }}
   {{ HTML::script('js/lib/bootstrap.js') }}
   {{ HTML::script('js/lib/jasny-bootstrap.min.js') }}
@@ -40,9 +40,6 @@
   {{ HTML::style('css/bootstrap-responsive.css'); }}
   {{ HTML::style('css/bootstrap-fileupload.css'); }}
 
-<!-- script especiales -->
-  {{ HTML::script('js/yepnope.js') }}
-  {{ HTML::script('js/rulesJS.js') }}
 </head>
 <body>
   <!--[if lt IE 7]>
@@ -53,18 +50,17 @@
       <div class="row">
       <div class="col-lg-12 col-lg-offset-4">
         <div class="col-lg-3">
-        {{ Form::open(array('url' => 'LoginUsuario')) }}
           <p class="bg-success">Iniciar Sesión</p>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" class="form-control" placeholder="Ingresar email">
+            <input type="email" name="email" id="email" class="form-control" placeholder="Ingresar email">
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" placeholder="Ingresar Password">
+            <input type="password" name="password" id="password" class="form-control" placeholder="Ingresar Password">
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        {{ Form::close() }}
+          <button type="button" id="login" class="btn btn-default">Submit</button>
+        <div class="alert alert-danger hide" id="alert-login" role="alert">Usuario y contraseña incorrecto. Vuelva a intentarlo</div>
       </div>
       </div>
     </div>

@@ -14,6 +14,7 @@ Missing/Lista de Usuarios
 <br/>
 {{ HTML::link('indexcma','Volver',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 {{ HTML::link('CrearUsuario','Crear Usuario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
+{{ HTML::link('ListaPlanes','Lista de Planes',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 <br/>
 <br/>
 <table class="table table-hover">
@@ -29,6 +30,9 @@ Missing/Lista de Usuarios
 		</th>
 		<th>
 			Permiso
+		</th>
+		<th>
+			Plan
 		</th>
 		<th>
 			Examenes
@@ -48,28 +52,31 @@ Missing/Lista de Usuarios
     @foreach($usuarios as $user)
     <tr>
 		<td>
-			{{ $user->nombre }} {{ $user->apellido_paterno}} {{$user->apellido_materno}}
+			{{ $user['nombre'] }} {{ $user['apellido_paterno']}} {{$user['apellido_materno']}}
 		</td>
 		<td>
-			{{ $user->rut }} 
+			{{ $user['rut'] }} 
 		</td>
 		<td>
-			{{ $user->correo }} 
+			{{ $user['email'] }} 
 		</td>
 		<td>
-			{{ $user->getPermiso($user->id_permiso) }}
+			{{ $user['permiso'] }}
 		</td>
 		<td>
-			{{ HTML::link('users/delete/'.$user->id,'Examenes',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
+			{{ $user['plan'] }}
 		</td>
 		<td>
-			{{ HTML::link('HorarioUsuario/'.$user->id,'Horario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
+			{{ HTML::link('ListaAlumnoExamenes/'.$user['id'],'Examenes',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 		</td>
 		<td>
-			{{ HTML::link('EditarUsuario/'.$user->id,'Editar Usuario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
+			{{ HTML::link('HorarioUsuario/'.$user['id'],'Horario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 		</td>
 		<td>
-			<input type="button" class="btn btn-default borrar_usuario" value="Borrar Usuario" data-id="{{ $user->id }}">
+			{{ HTML::link('EditarUsuario/'.$user['id'],'Editar Usuario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
+		</td>
+		<td>
+			<input type="button" class="btn btn-default borrar_usuario" value="Borrar Usuario" data-id="{{ $user['id'] }}">
 		</td>
 	</tr>
         

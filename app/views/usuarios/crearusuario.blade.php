@@ -4,7 +4,7 @@
 {{ HTML::script('js/lib/jquery.ui.js') }}
 @stop
 @section('titulo')
-Missing/Lista de Usuarios
+CMA/Crear Usuario
 @stop
 @section('sidebar')
     @parent
@@ -79,10 +79,28 @@ Missing/Lista de Usuarios
 		</th>
 		<th>
 			<select name="permiso">
-				<option value="3" selected>Alumno</option>
+				<option value="0" selected>Seleccione una opción</option>
+				<option value="3" >Alumno</option>
 				<option value="2">Profesor</option>
 				<option value="1">Administrador</option>
 			</select>
+		</th>
+	</tr>
+	<tr>
+		<th>
+			Plan 
+		</th>
+		<th>
+			@if($planes != null)
+			<select name="plan">
+				<option value="0">Seleccione una opción</option>
+			@foreach($planes as $p)
+					<option value="{{$p->id}}">{{$p->nombre}}</option>
+    		@endforeach
+    		</select>
+			@else
+			No existen Planes
+			@endif
 		</th>
 	</tr>
 	<tr>

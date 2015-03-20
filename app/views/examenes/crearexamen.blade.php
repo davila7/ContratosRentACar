@@ -14,7 +14,7 @@ CMA/Crear Examen
 {{ HTML::link('ListaExamenes','Volver',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 <br/>
 <br/>
-{{ Form::open(array('url' => 'CrearExamen', 'id'=>'form_examen')) }}
+{{ Form::open(array('url' => 'CrearExamen')) }}
 <table class="table table-hover">
 	<tr>
 		<th>
@@ -25,41 +25,8 @@ CMA/Crear Examen
 		</th>
 	</tr>
 	<tr>
-		@if($preg != null)
 		<th>
-			Seleccione las Preguntas
-		</th>
-		<th>
-			<table>
-			<tr>
-				<td>
-					{{ Form::select('pregunta', $preg) }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					{{ Form::select('pregunta', $preg) }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					{{ Form::select('pregunta', $preg) }}
-				</td>
-			</tr>
-			<tr>
-				<td>
-					{{ Form::select('pregunta', $preg) }}
-				</td>
-			</tr>
-			</table>
-		</th>
-		@else
-			No existen preguntas
-		@endif
-	</tr>
-	<tr>
-		<th>
-			<input type="submit" value="Guardar">
+			<input type="submit" id="submit" value="Guardar">
 		</th>
 	</tr>
 </table>

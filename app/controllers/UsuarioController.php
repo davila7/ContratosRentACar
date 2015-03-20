@@ -11,28 +11,67 @@ class UsuarioController extends BaseController
      */
 
     public function IndexCMA(){
+        if (Auth::check()){
             return View::make('indexcma');
+        }else{
+            return View::make('home'); 
+        }
     }
 
-    public function LoginUsuarioPost(){
+    public function LoginUsuarioGet(){
         $credentials = array(
         'email' => Input::get('email'),
         'password' => Input::get('password'));
         if(Auth::attempt($credentials)){
-            return View::make('indexcma');
+            $user = Usuario::where('email', '=', Input::get('email'))->firstOrFail();
+            Auth::login($user);
+            return Response::json(array('msg'=>Auth::check()));
         }else{
-            return View::make('indexcma');
-            //return Response::json(array('msg'=>'Credenciales no validas'),500);
+            return Response::json(array('msg'=>'0'));
         }   
+    }
+
+     public function CerrarSesionGet(){
+        Auth::logout();
+        return View::make('home'); 
     }
 
     public function ListaUsuarios(){
         $usuarios = Usuario::all();
-        return View::make('usuarios.listausuarios', array('usuarios'=>$usuarios));
+
+        $usuario = array();
+
+        foreach($usuarios as $us){
+
+            $p = "Sin Plan";
+
+            $plan = DB::table('planes')
+                    ->where('id', $us->id_plan)
+                    ->first();
+
+            if($plan){
+                $p = $plan->nombre;
+            }
+
+            $permiso = $us->getPermiso($us->id_permiso);
+
+            $usuario[] = array(
+                "id" => $us->id,
+                "rut" => $us->rut,
+                "nombre" => $us->nombre,
+                "apellido_paterno" => $us->apellido_paterno,
+                "apellido_materno" => $us->apellido_materno,
+                "email" => $us->email,
+                "permiso" => $permiso,
+                "plan" => $p
+                );
+        }
+        return View::make('usuarios.listausuarios', array('usuarios'=>$usuario));
     }
 
     public function CrearUsuarioGet(){
-        return View::make('usuarios.crearusuario');
+        $planes = Planes::all();
+        return View::make('usuarios.crearusuario', array('planes'=>$planes));
     }
 
     public function CrearUsuarioPost(){
@@ -46,6 +85,7 @@ class UsuarioController extends BaseController
         $user->rut = Input::get("rut");
         $user->direccion = Input::get("direccion");
         $user->id_permiso = Input::get("permiso");
+        $user->id_plan = Input::get("plan");
         $user->email = Input::get("correo");
         $user->save();
         $LastInsertId = $user->id;
@@ -130,23 +170,105 @@ class UsuarioController extends BaseController
         $horario->delete();
     }
 
-    public function isLoggedIn()
-    {
-        if(Auth::check()){
-            $perfil = DB::table('perfiles')
-                    ->where('usuario_id', Auth::user()->id)
-                    ->first();
-            return Response::json(array('isloggin'=>Auth::user()->usuario,'usuario_id'=>Auth::user()->id,
-                'esCreado'=>Auth::user()->esCreado,'email'=>Auth::user()->email, 'primerLogin'=>Auth::user()->primerLogin, 'avatar'=>$perfil->avatar_path));
-        }else{
-        	return Response::json(array('isloggin'=>'false'));
-        }   
+
+
+    public function ListaPlanes(){
+        $planes = Planes::all();
+        return View::make('usuarios.listaplanes', array('planes'=>$planes));
     }
-    
-    public function get_logout()
-    {
-        Auth::logout();
-        return Response::json(array('msg'=>'Logout'));
+
+    public function CrearPlanGet(){
+        return View::make('usuarios.crearplan');
+    }
+
+    public function CrearPlanPost(){
+        $plan = new Planes;
+        $plan->nombre = Input::get("nombre");
+        $plan->valor = Input::get("valor");
+        $plan->save();
+        $LastInsertId = $plan->id;
+
+        return Redirect::to('ListaPlanes');
+    }
+
+    public function BorrarPlanGet($plan_id){
+        $plan = Planes::find($plan_id);
+        if(is_null($plan))
+        {
+            return Redirect::to('ListaPlanes');
+        }
+
+        $usuario = DB::table('usuarios')
+            ->where('id_plan', '=', $plan_id )
+            ->first();
+
+        if(!is_null($usuario)){
+            return Response::json(array('msg'=>'0'));
+        }else{
+            //borra plan si nadie lo tiene
+            $plan->delete();
+            return Response::json(array('msg'=>'1'));
+        }
+        return Redirect::to('ListaPlanes');
+    }
+
+    public function EditarPlanGet($plan_id){
+        $plan = Planes::find($plan_id);
+        if(is_null($plan))
+        {
+            return Redirect::to('ListaPlanes');
+        }
+        return View::make('usuarios.editarplan')->with('plan', $plan);
+    }
+
+    public function EditarPlanPost(){
+        $plan = Planes::find(Input::get("id"));
+        $plan->nombre = Input::get("nombre");
+        $plan->valor = Input::get("valor");
+        $plan->save();
+        $LastInsertId = $plan->id;
+
+        return Redirect::to('ListaPlanes');
+    }
+
+     public function ListaAlumnoExamenesGet($id_user){
+        $user = Usuario::find($id_user);
+        $examenusuarios = DB::table('examenusuarios')
+            ->where('id_usuario', '=', $id_user )
+            ->lists('id_examen');
+
+        $exam = Examen::all();
+        $examenes = array();
+        foreach($exam as $e){
+            $existe = false;
+            if(in_array($e->id, $examenusuarios)){
+                $existe = true;
+            }
+            $examenes[] = array(
+                "id"=>$e->id,
+                "nombre"=>$e->nombre,
+                "existe"=>$existe
+            );
+        }
+        return View::make('examenes.listaalumnoexamenes')
+                                                    ->with('user', $user)
+                                                    ->with('examenes', $examenes);
+    }
+
+    public function AgregarExamenAlumnoGet($id_examen, $id_usuario){
+        $examenusuario = new ExamenUsuario;
+        $examenusuario->id_examen = $id_examen;
+        $examenusuario->id_usuario = $id_usuario;
+        $examenusuario->save();
+        return Response::json(array('msg'=>'ok'));
+    }
+
+    public function QuitarExamenAlumnoGet($id_examen, $id_usuario){
+        $examen_preguntas = DB::table('examenusuarios')
+            ->where('id_examen', '=', $id_examen )
+            ->where('id_usuario','=',$id_usuario)
+            ->delete();
+        return Response::json(array('msg'=>'ok'));
     }
 
     public function ObtieneUserLogeado(){
@@ -162,26 +284,6 @@ class UsuarioController extends BaseController
         }  
     }
     
-    public function post_index(){
-        $credentials = array(
-        'username' => Input::get('email'),
-        'password' => Input::get('password'));
-        
-        if(Auth::attempt($credentials))
-        {
-            return Redirect::to('objetos/index');
-        }
-        else
-        {
-            return Redirect::back()->with_input();
-        }   
-    }
-	
-	
-
-
-
-
     //cambia la imagen del perfil
     public function CargaImagenPerfil(){
         if (Input::hasFile('file')){
@@ -199,27 +301,4 @@ class UsuarioController extends BaseController
         }
         return Response::json(array('msg'=>'ok'));
     }
-    
-    public function post_update($user_id)
-    {
-		$user = Usuario::find($user_id);
-		
-		if(is_null($user))
-		{
-			return Redirect::to('users/listausuarios');
-		}
-		//echo Input::get('esadmin');
-        $user->nombre = Input::get('nombre');
-        $user->email = Input::get('email');
-		$user->esadmin = Input::get('esadmin');
-        
-        if(Input::has('password'))
-        {
-			$user->password = Input::get('password');
-		}
-        
-        $user->save();
-        
-        return Redirect::to('users/listausuarios');
-	}
 }

@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 @section('head')
-
+{{ HTML::script('js/functions/listaexamen.js') }}
 @stop
 @section('titulo')
 CMA/Lista de Examenes
@@ -24,12 +24,9 @@ CMA/Lista de Examenes
 		<th>
 			Creado
 		</th>
-		<th>
+		<!--<th>
 			Ver Alumnos
-		</th>
-		<th>
-			Preguntas
-		</th>
+		</th>-->
 		<th>
 			Editar
 		</th>
@@ -47,14 +44,11 @@ CMA/Lista de Examenes
 		<td>
 			{{ $examen->created_at }} 
 		</td>
-		<td>
+		<!--<td>
 			{{ HTML::link('ListaExamenAlumnos/'.$examen->id,'Alumnos',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
-		</td>
+		</td>-->
 		<td>
-			{{ HTML::link('AgregarPreguntas/'.$examen->id,'Ver Preguntas',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
-		</td>
-		<td>
-			{{ HTML::link('EditarUsuario/'.$examen->id,'Editar Usuario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
+			{{ HTML::link('EditarExamen/'.$examen->id,'Editar Examen',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 		</td>
 		<td>
 			<input type="button" class="btn btn-default borrar_examen" value="Borrar Examen" data-id="{{ $examen->id }}">
@@ -64,7 +58,7 @@ CMA/Lista de Examenes
     @endforeach
 	</lu>
 @else
-No existen usuarios
+No existen examenes
 @endif
 </table>
 @stop

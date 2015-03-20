@@ -10,13 +10,11 @@ class ExamenesController extends BaseController {
 
     public function CrearExamenGet(){
     	$preguntas = Pregunta::all();
-    	$preg = array();
+    	$preg = array("0"=>"Seleccione una pregunta" );
     	foreach($preguntas as $p){
-    		$preg[] = array(
-    			$p->nombre => $p->nombre
-    			);
+    		$preg[$p->id] = $p->texto;
     	}
-        return View::make('examenes.crearexamen', array('preg'=>$preg));
+        return View::make('examenes.crearexamen', array('preg'=>$preguntas));
     }
 
     public function CrearExamenPost(){
@@ -26,6 +24,81 @@ class ExamenesController extends BaseController {
         $LastInsertId = $examen->id;
 
         return Redirect::to('ListaExamenes');
+    }
+
+    public function EditarExamenGet($id_examen){
+        $examen = Examen::find($id_examen);
+        $examenpreguntas = DB::table('examenpreguntas')
+    		->where('id_examen', '=', $id_examen )
+    		->lists('id_pregunta');
+
+        $pregu = Pregunta::all();
+        $preg = array();
+        foreach($pregu as $p){
+            $existe = false;
+            if(in_array($p->id, $examenpreguntas)){
+                $existe = true;
+            }
+            $preg[] = array(
+                "id"=>$p->id,
+                "texto"=>$p->texto,
+                "existe"=>$existe
+            );
+        }
+
+        if(is_null($examen)){
+            return Redirect::to('ListaExamenes');
+        }
+        return View::make('examenes.editarexamen')->with('examen', $examen)
+        										  ->with('preg', $preg);
+    }
+
+    public function EditarExamenPost(){
+    	$id = Input::get("id");
+        $examen = Examen::find($id);
+        $examen->nombre = Input::get("nombre");
+        $examen->save();
+        $LastInsertId = $examen->id;
+
+        $examen_preguntas = DB::table('examenpreguntas')
+    		->where('id_examen', '=', $id )
+    		->delete();
+
+        return Redirect::to('ListaExamenes');
+    }
+
+    public function AgregarPreguntaExamenGet($id_examen, $id_pregunta){
+        $examenpregunta = new ExamenPregunta;
+        $examenpregunta->id_examen = $id_examen;
+        $examenpregunta->id_pregunta = $id_pregunta;
+        $examenpregunta->orden = 1;
+        $examenpregunta->save();
+        return Response::json(array('msg'=>'ok'));
+    }
+
+    public function QuitarPreguntaExamenGet($id_examen, $id_pregunta){
+        $examen_preguntas = DB::table('examenpreguntas')
+            ->where('id_examen', '=', $id_examen )
+            ->where('id_pregunta','=',$id_pregunta)
+            ->delete();
+        return Response::json(array('msg'=>'lala'));
+    }
+
+    public function BorrarExamenGet(){
+        $id = Input::get('id');
+        $examen_preguntas = DB::table('examenpreguntas')
+    		->where('id_examen', '=', $id )
+    		->delete();
+
+    	$examen_usuarios = DB::table('examenusuarios')
+    		->where('id_examen', '=', $id )
+    		->delete();
+
+    	$examen = DB::table('examenes')
+    		->where('id', '=', $id )
+    		->delete();
+
+        return Response::json(array('msg'=>'1'));
     }
 
     public function ListaPreguntas(){
@@ -168,6 +241,27 @@ class ExamenesController extends BaseController {
         	$pregunta->delete();
         	return Response::json(array('msg'=>'1'));
         }
+    }
+
+    public function ListaExamenAlumnosGet($id_examen){
+        $examen = Examen::find($id_examen);
+        $examenusuarios = DB::table('examenusuarios')
+            ->where('id_examen', '=', $id_examen )
+            ->lists('id_usuario');
+
+        $usuarios = array();
+
+        if($examenusuarios){
+            $usuarios = DB::table('usuarios')
+                    ->whereIn('id', $examenusuarios)->get();
+        }
+
+
+
+
+        return View::make('examenes.listaexamenalumnos')
+                                                    ->with('examen', $examen)
+                                                    ->with('usuarios', $usuarios);
     }
 
 

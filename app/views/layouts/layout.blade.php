@@ -19,7 +19,7 @@
   {{ HTML::script('js/lib/jquery-ui.min.js') }}
   {{ HTML::script('js/lib/jquery.validate.js') }}
   {{ HTML::script('js/lib/additional-methods.min.js') }}
-  {{ HTML::script('js/page/home.js') }}
+  {{ HTML::script('js/functions/indexcma.js') }}
   {{ HTML::script('js/lib/underscore.js') }}
   {{ HTML::script('js/lib/bootstrap.js') }}
   {{ HTML::script('js/lib/jasny-bootstrap.min.js') }}
@@ -53,21 +53,7 @@
       </a>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-      <ul class="nav navbar-nav navbar-right login-home hide" ng-controller="loginController">
-       <form class="navbar-form navbar-left" ng-submit="login()">
-        <div class="form-group">
-          <input type="text" name="email" class="form-control" placeholder="Ingresar el correo" ng-model="credentials.email" required/>
-          <input type="password" name="password" class="form-control" placeholder="Ingresar el password" ng-model="credentials.password" required/>
-        </div>
-      </form>
-      <li><a class="sing-up pointer nav-bar-text">Crear Cuenta</a></li>
-       <li><a class="iniciar-sesion pointer nav-bar-text">Iniciar Sesión</a></li>
-      <div class="alert alert-danger" id="login-error" style="display:none;">
-        <button type="button" class="close">×</button>
-        Login Invalido... Vuelve a intentarlo.
-      </div>
-      </ul>
-      <ul class="nav navbar-nav navbar-right logout-home hide" ng-controller="loginController">
+      <ul class="nav navbar-nav navbar-right logout-home" ng-controller="loginController">
         <li><a class="nav-bar-text" id="username" ></a></li>
         <li><a class="brand"> 
           <img class="avatar img-circle" src="img/avatar-default.jpeg" height="30px" width="30px"></a></li>
@@ -78,11 +64,10 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               <li class="pointer">
-                <a class="dropdown-menu-text" id="carga_perfil" ng-click="showModalEditarPerfil()">Editar Perfil</a>
+                <a class="dropdown-menu-text" id="carga_perfil" ng-click="showModalEditarPerfil()">Mi puntuación</a>
               </li>
-              <li class="pointer dropdown-menu-text"><a href="http://www.missing.cl" class="dropdown-menu-text">Más Información</a></li>
               <li class="divider"></li>
-              <li><a ng-click="logout()" class="pointer dropdown-menu-text">Cerrar Sesión</a></li>
+              <li><a href="CerrarSesion" class="pointer dropdown-menu-text">Cerrar Sesión</a></li>
           </ul>
           </li>
       </ul>
