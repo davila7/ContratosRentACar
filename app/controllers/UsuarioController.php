@@ -123,7 +123,7 @@ class UsuarioController extends BaseController
         $user->rut = Input::get("rut");
         $user->direccion = Input::get("direccion");
         $user->id_permiso = Input::get("permiso");
-        $user->email = Input::get("correo");
+        $user->email = Input::get("email");
         $user->save();
         $LastInsertId = $user->id;
 

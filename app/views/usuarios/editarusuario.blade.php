@@ -70,7 +70,7 @@ Missing/Lista de Usuarios
 			Correo 
 		</th>
 		<th>
-			<input type="text" name="correo" placeholder="Ingresar un correo" value="{{ $user->correo }}" id="correo">
+			<input type="text" name="email" placeholder="Ingresar un correo" value="{{ $user->correo }}" id="correo">
 		</th>
 	</tr>
 	<tr>
