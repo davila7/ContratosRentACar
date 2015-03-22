@@ -9,8 +9,15 @@ $(document).ready(function() {
 			success:function(data){
 				jsondata = eval(data);
 				msg = eval(jsondata.msg);
+				tipo = eval(jsondata.tipo);
 				if(msg == true){
-					$(location).attr('href',$('#baseurl').val()+'/indexcma');
+					alert(tipo)
+					if(tipo == 3){
+						$(location).attr('href',$('#baseurl').val()+'/IndexAlumno');
+					}else{
+						$(location).attr('href',$('#baseurl').val()+'/indexcma');
+					}
+					
 				}else{
 					$('#alert-login').removeClass('hide');
 				}			

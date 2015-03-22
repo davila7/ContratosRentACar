@@ -264,6 +264,36 @@ class ExamenesController extends BaseController {
                                                     ->with('usuarios', $usuarios);
     }
 
+    public function RealizarExamenGet($id_usuario, $id_examen){
+            $examen = Examen::find($id_examen);
+            $examen_preguntas = DB::table('examenpreguntas')
+            ->where('id_examen', '=', $id_examen )
+            ->lists('id_pregunta');
+
+
+
+            $preguntas = DB::table('preguntas')
+            ->whereIn('id', $examen_preguntas )
+            ->get();
+
+            $pregresp = array();
+
+            foreach($preguntas as $p){
+                $respuestas = DB::table('respuestas')
+                ->where('id_pregunta', $p->id )
+                ->get();
+                $pregresp = array(
+                    "texto" => $p->texto,
+                    "respuestas" => $respuestas
+                    );
+            }
+
+          return View::make('examenes.realizaexamen')
+                                                    ->with('examen', $examen)
+                                                    ->with('id_usuario', $id_usuario)
+                                                    ->with('pregresp', $pregresp);
+    }
+
 
 
 }

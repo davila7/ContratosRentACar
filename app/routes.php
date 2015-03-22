@@ -29,6 +29,7 @@ Route::get("/", function()
 
 //INDEX
 Route::get('/indexcma','UsuarioController@IndexCMA');
+Route::get('/IndexAlumno','UsuarioController@IndexAlumno');
 
 
 //USUARIOS
@@ -69,6 +70,7 @@ Route::get('/ExamenUsuarios','ExamenesController@ExamenUsuariosGet');
 Route::get('/AgregarPreguntaExamen/{id_examen}/{id_pregunta}','ExamenesController@AgregarPreguntaExamenGet');
 Route::get('/QuitarPreguntaExamen/{id_examen}/{id_pregunta}','ExamenesController@QuitarPreguntaExamenGet');
 Route::get('/ListaExamenAlumnos/{id_examen}','ExamenesController@ListaExamenAlumnosGet');
+Route::get('/RealizarExamen/{id_user}/{id_examen}','ExamenesController@RealizarExamenGet');
 
 
 

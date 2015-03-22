@@ -18,6 +18,26 @@ class UsuarioController extends BaseController
         }
     }
 
+    public function IndexAlumno(){
+        if (Auth::check()){
+            $id_user = Auth::id();
+            $user = Usuario::find($id_user);
+            $examenusuarios = DB::table('examenusuarios')
+                ->where('id_usuario', '=', $id_user )
+                ->lists('id_examen');
+
+            $examenes = DB::table('examenes')
+                ->whereIn('id',  $examenusuarios )
+                ->get();
+            
+            return View::make('usuarios.misexamenes')
+                                                        ->with('user', $user)
+                                                        ->with('examenes', $examenes);
+        }else{
+            return View::make('home'); 
+        }
+    }
+
     public function LoginUsuarioGet(){
         $credentials = array(
         'email' => Input::get('email'),
@@ -25,7 +45,7 @@ class UsuarioController extends BaseController
         if(Auth::attempt($credentials)){
             $user = Usuario::where('email', '=', Input::get('email'))->firstOrFail();
             Auth::login($user);
-            return Response::json(array('msg'=>Auth::check()));
+            return Response::json(array('msg'=>Auth::check(),'tipo'=>$user->id_permiso));
         }else{
             return Response::json(array('msg'=>'0'));
         }   
