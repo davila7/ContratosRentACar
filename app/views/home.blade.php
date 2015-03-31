@@ -7,7 +7,6 @@
 <!-- AGREGANDO EL MODULO APP (ANGULARJS) -->
 <html>
 <head>
-<title>PANEL DE CONTROL @if (Auth::check()) | {{Auth::user()->usuario}} @endif</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +19,7 @@
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
   <!-- JS -->
   {{ HTML::script('js/lib/jquery.js') }}
-  {{ HTML::script('js/functions/indexcma.js') }}
+  {{ HTML::script('js/functions/index.js') }}
   {{ HTML::script('js/lib/underscore.js') }}
   {{ HTML::script('js/lib/bootstrap.js') }}
   {{ HTML::script('js/lib/jasny-bootstrap.min.js') }}

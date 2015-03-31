@@ -10,29 +10,9 @@ class UsuarioController extends BaseController
      * Show the profile for the given user.
      */
 
-    public function IndexCMA(){
+    public function Index(){
         if (Auth::check()){
-            return View::make('indexcma');
-        }else{
-            return View::make('home'); 
-        }
-    }
-
-    public function IndexAlumno(){
-        if (Auth::check()){
-            $id_user = Auth::id();
-            $user = Usuario::find($id_user);
-            $examenusuarios = DB::table('examenusuarios')
-                ->where('id_usuario', '=', $id_user )
-                ->lists('id_examen');
-
-            $examenes = DB::table('examenes')
-                ->whereIn('id',  $examenusuarios )
-                ->get();
-            
-            return View::make('usuarios.misexamenes')
-                                                        ->with('user', $user)
-                                                        ->with('examenes', $examenes);
+            return View::make('index');
         }else{
             return View::make('home'); 
         }

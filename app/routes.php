@@ -22,14 +22,17 @@ session_start();
 
 Route::get("/", function()
 {
-    return View::make("home");
+	if(Auth::user())
+	{
+		return Redirect::to('/index');
+	}
+	return Redirect::to('/index');
 });
 
 /************ RUTA CMA ***************/
 
 //INDEX
-Route::get('/indexcma','UsuarioController@IndexCMA');
-Route::get('/IndexAlumno','UsuarioController@IndexAlumno');
+Route::get('/index','UsuarioController@Index');
 
 
 //USUARIOS
@@ -50,80 +53,15 @@ Route::get('/QuitarExamenAlumno/{id_examen}/{id_usuario}','UsuarioController@Qui
 
 
 
-//PLANES
-Route::get('/ListaPlanes','UsuarioController@ListaPlanes');
-Route::get('/CrearPlan','UsuarioController@CrearPlanGet');
-Route::post('/CrearPlan','UsuarioController@CrearPlanPost');
-Route::get('/BorrarPlan/{plan_id}','UsuarioController@BorrarPlanGet');
-Route::get('/EditarPlan/{plan_id}','UsuarioController@EditarPlanGet');
-Route::post('/EditarPlan','UsuarioController@EditarPlanPost');
+//CONTRATOS
+Route::get('/ListaContratos/{busqueda?}','ContratoController@ListaContratos');
+Route::get('/CrearContrato','ContratoController@CrearContratoGet');
+Route::post('/CrearContrato','ContratoController@CrearContratoPost');
+Route::get('/DetalleContrato/{id}','ContratoController@DetalleContratoGet');
+Route::get('/BorrarContrato/{id}','ContratoController@BorrarContratoGet');
+Route::get('/EditarContrato/{id}','ContratoController@EditarContratoGet');
+Route::post('/EditarContrato','ContratoController@EditarContratoPost');
 
-
-//EXAMENES
-Route::get('/ListaExamenes','ExamenesController@ListaExamenes');
-Route::get('/CrearExamen','ExamenesController@CrearExamenGet');
-Route::post('/CrearExamen','ExamenesController@CrearExamenPost');
-Route::get('/BorrarExamen','ExamenesController@BorrarExamenGet');
-Route::get('/EditarExamen/{examen_id}','ExamenesController@EditarExamenGet');
-Route::post('/EditarExamen','ExamenesController@EditarExamenPost');
-Route::get('/ExamenUsuarios','ExamenesController@ExamenUsuariosGet');
-Route::get('/AgregarPreguntaExamen/{id_examen}/{id_pregunta}','ExamenesController@AgregarPreguntaExamenGet');
-Route::get('/QuitarPreguntaExamen/{id_examen}/{id_pregunta}','ExamenesController@QuitarPreguntaExamenGet');
-Route::get('/ListaExamenAlumnos/{id_examen}','ExamenesController@ListaExamenAlumnosGet');
-Route::get('/RealizarExamen/{id_user}/{id_examen}','ExamenesController@RealizarExamenGet');
-
-
-
-//PREGUNTAS
-Route::get('/ListaPreguntas','ExamenesController@ListaPreguntas');
-Route::get('/CrearPregunta','ExamenesController@CrearPreguntaGet');
-Route::post('/CrearPregunta','ExamenesController@CrearPreguntaPost');
-Route::get('/BorrarPregunta','ExamenesController@BorrarPreguntaGet');
-Route::get('/EditarPregunta/{pregunta_id}','ExamenesController@EditarPreguntaGet');
-Route::post('/EditarPregunta','ExamenesController@EditarPreguntaPost');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/************ FIN RUTA CMA ***************/
-
-
-
-
-
-
-
-
-
-
-
-
-/************ RUTA DE CACHEI ***************/
-
-
-//USUARIOS
-
-
-
-
-
-
-
-
-/***** FIN RUTA CEACHEI *******/
 
 
 
