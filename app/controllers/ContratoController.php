@@ -122,124 +122,12 @@ class ContratoController extends BaseController
         return View::make('contratos.detallecontrato')->with("contrato",$contrato);
     }
 
-    public function CrearPlanPost(){
-        $plan = new Planes;
-        $plan->nombre = Input::get("nombre");
-        $plan->valor = Input::get("valor");
-        $plan->save();
-        $LastInsertId = $plan->id;
+    public function VerContratoPDF(){
 
-        return Redirect::to('ListaPlanes');
+        
+
+
+
     }
 
-    public function BorrarPlanGet($plan_id){
-        $plan = Planes::find($plan_id);
-        if(is_null($plan))
-        {
-            return Redirect::to('ListaPlanes');
-        }
-
-        $usuario = DB::table('usuarios')
-            ->where('id_plan', '=', $plan_id )
-            ->first();
-
-        if(!is_null($usuario)){
-            return Response::json(array('msg'=>'0'));
-        }else{
-            //borra plan si nadie lo tiene
-            $plan->delete();
-            return Response::json(array('msg'=>'1'));
-        }
-        return Redirect::to('ListaPlanes');
-    }
-
-    public function EditarPlanGet($plan_id){
-        $plan = Planes::find($plan_id);
-        if(is_null($plan))
-        {
-            return Redirect::to('ListaPlanes');
-        }
-        return View::make('usuarios.editarplan')->with('plan', $plan);
-    }
-
-    public function EditarPlanPost(){
-        $plan = Planes::find(Input::get("id"));
-        $plan->nombre = Input::get("nombre");
-        $plan->valor = Input::get("valor");
-        $plan->save();
-        $LastInsertId = $plan->id;
-
-        return Redirect::to('ListaPlanes');
-    }
-
-     public function ListaAlumnoExamenesGet($id_user){
-        $user = Usuario::find($id_user);
-        $examenusuarios = DB::table('examenusuarios')
-            ->where('id_usuario', '=', $id_user )
-            ->lists('id_examen');
-
-        $exam = Examen::all();
-        $examenes = array();
-        foreach($exam as $e){
-            $existe = false;
-            if(in_array($e->id, $examenusuarios)){
-                $existe = true;
-            }
-            $examenes[] = array(
-                "id"=>$e->id,
-                "nombre"=>$e->nombre,
-                "existe"=>$existe
-            );
-        }
-        return View::make('examenes.listaalumnoexamenes')
-                                                    ->with('user', $user)
-                                                    ->with('examenes', $examenes);
-    }
-
-    public function AgregarExamenAlumnoGet($id_examen, $id_usuario){
-        $examenusuario = new ExamenUsuario;
-        $examenusuario->id_examen = $id_examen;
-        $examenusuario->id_usuario = $id_usuario;
-        $examenusuario->save();
-        return Response::json(array('msg'=>'ok'));
-    }
-
-    public function QuitarExamenAlumnoGet($id_examen, $id_usuario){
-        $examen_preguntas = DB::table('examenusuarios')
-            ->where('id_examen', '=', $id_examen )
-            ->where('id_usuario','=',$id_usuario)
-            ->delete();
-        return Response::json(array('msg'=>'ok'));
-    }
-
-    public function ObtieneUserLogeado(){
-        if(Auth::check()){
-            $user = Usuario::find(Auth::user()->id);
-            $nombre = $user->usuario;
-            $email = $user->email;
-            $esCreado = $user->esCreado;
-            $id = $user->id;
-            return Response::json(array('msg'=>'true','nombre'=>$nombre,'email'=>$email, 'esCreado'=>$esCreado));
-        }else{
-            return Response::json(array('msg'=>'false'));
-        }  
-    }
-    
-    //cambia la imagen del perfil
-    public function CargaImagenPerfil(){
-        if (Input::hasFile('file')){
-            $perfil = DB::table('perfiles')
-                    ->where('usuario_id', Auth::user()->id)
-                    ->first();
-            $file = Input::file('file');
-            $destinationPath = '../public/perfil';
-            $extension =$file->getClientOriginalExtension(); 
-            $file_name = $file->getClientOriginalName();
-            $filename = $file_name.'.'.$extension;
-            $perfil->avatar_path = $filename;
-            $perfil->save();
-            $upload_success = $file->move($destinationPath, $filename);
-        }
-        return Response::json(array('msg'=>'ok'));
-    }
 }
