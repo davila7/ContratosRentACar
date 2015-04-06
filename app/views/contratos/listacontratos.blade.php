@@ -44,7 +44,64 @@
 </div>
 </div>
 <br/>
-<ul class="list-group">
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>
+          Cliente
+        </th>
+
+        <th>
+          Detalle
+        </th>
+
+        <th>
+          Ver PDF
+        </th>
+
+        <th>
+          Editar
+        </th>
+
+        <th>
+          Eliminar
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+@if($contratos != null)
+  @foreach($contratos as $cont)
+      <tr>
+        <td>
+          {{ $cont->cliente }}
+        </td>
+        <td>
+            <a href="DetalleContrato/{{ $cont->id}}" class="btn btn-xs btn-info" title="Detalles">
+            <i class="fa fa-check-square-o"></i>  Detalles </a>
+        </td>
+        <td>
+           <a href="VerContratoPDF/{{ $cont->id}}" class="btn btn-xs btn-info" title="Detalles">
+            <i class="fa fa-check-square-o"></i>  Ver pdf </a>
+        </td>
+        <td>
+          <a href="EditarContrato/{{ $cont->id}}" class="btn btn-xs btn-warning" title="Editar">
+          <i class="fa fa-check-square-o"></i>  Editar </a>
+        </td>
+        <td>
+          <button class="btn btn-xs btn-danger borrar_contrato" data-id="{{ $cont->id }}" title="Eliminar">
+          <i class="fa fa-check-square-o"></i>  Eliminar </button>
+        </td>
+       @endforeach
+      @else
+        No existen Contratos
+      @endif
+    </tbody>
+  </table>
+</div>
+
+<!--<ul class="list-group">
 	<li class="list-group-item list-group-item active">
      	<h4 class="list-group-item-heading">Contratos</h4>
     </li>
@@ -61,6 +118,9 @@
 	     
 	     <a href="DetalleContrato/{{ $cont->id}}" class="btn btn-xs btn-info pull-right" title="Detalles">
 	     	<i class="fa fa-check-square-o"></i>  Detalles </a>
+
+        <a href="VerContratoPDF/{{ $cont->id}}" class="btn btn-xs btn-info pull-right" title="Detalles">
+        <i class="fa fa-check-square-o"></i>  Ver pdf </a>
 	     </h4>
 
 	     <span>Inicio: {{ date("d-m-Y",strtotime($cont->fecha_inicial)) }} </span> | <span>Fin: {{ date("d-m-Y",strtotime($cont->fecha_final)) }} </span>
@@ -70,5 +130,5 @@
 @else
 	No existen Contratos
 @endif
-</ul>
+</ul>-->
 @stop

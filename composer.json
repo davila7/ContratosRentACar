@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"facebook/php-sdk-v4": "4.0.*"
+		"facebook/php-sdk-v4": "4.0.*",
+		"thujohn/pdf": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

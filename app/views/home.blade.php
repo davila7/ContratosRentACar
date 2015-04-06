@@ -29,7 +29,6 @@
 
   <!-- CSS -->
   {{ HTML::style('css/jasny-bootstrap.min.css'); }}
-  {{ HTML::style('css/marker.css'); }}
   {{ HTML::style('css/font-awesome-4.2.0/css/font-awesome.css'); }}
   <!--{{ HTML::style('css/jquery.mobile.css'); }}-->
   {{ HTML::style('css/home.css'); }}

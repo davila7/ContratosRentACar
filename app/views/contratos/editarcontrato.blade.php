@@ -4,9 +4,6 @@
 @stop
 @section('titulo')
 @stop
-@section('sidebar')
-    @parent
-@stop
 @section('content')
 <h1> Editar Contrato</h1>
 <br/>
@@ -80,32 +77,32 @@
 		</td>
 		<td>
 			<select name="hora_inicial">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="00:00" >00:00</option>
-				<option value="01:00" >01:00</option>
-				<option value="02:00" >02:00</option>
-				<option value="03:00" >03:00</option>
-				<option value="04:00" >04:00</option>
-				<option value="05:00" >05:00</option>
-				<option value="06:00" >06:00</option>
-				<option value="07:00" >07:00</option>
-				<option value="08:00" >08:00</option>
-				<option value="09:00" >09:00</option>
-				<option value="10:00" >10:00</option>
-				<option value="11:00" >11:00</option>
-				<option value="12:00" >12:00</option>
-				<option value="13:00" >13:00</option>
-				<option value="14:00" >14:00</option>
-				<option value="15:00" >15:00</option>
-				<option value="16:00" >16:00</option>
-				<option value="17:00" >17:00</option>
-				<option value="18:00" >18:00</option>
-				<option value="19:00" >19:00</option>
-				<option value="20:00" >20:00</option>
-				<option value="21:00" >21:00</option>
-				<option value="22:00" >22:00</option>
-				<option value="23:00" >23:00</option>
-				<option value="24:00" >24:00</option>
+				<option value="0" {{ $contrato->hora_inicial == '0' ? 'selected' : '' }}>Seleccione una opción</option>
+				<option value="00:00" {{ $contrato->hora_inicial == '00:00' ? 'selected' : '' }}>00:00</option>
+				<option value="01:00" {{ $contrato->hora_inicial == '01:00' ? 'selected' : '' }}>01:00</option>
+				<option value="02:00" {{ $contrato->hora_inicial == '02:00' ? 'selected' : '' }}>02:00</option>
+				<option value="03:00" {{ $contrato->hora_inicial == '03:00' ? 'selected' : '' }}>03:00</option>
+				<option value="04:00" {{ $contrato->hora_inicial == '04:00' ? 'selected' : '' }}>04:00</option>
+				<option value="05:00" {{ $contrato->hora_inicial == '05:00' ? 'selected' : '' }}>05:00</option>
+				<option value="06:00" {{ $contrato->hora_inicial == '06:00' ? 'selected' : '' }}>06:00</option>
+				<option value="07:00" {{ $contrato->hora_inicial == '07:00' ? 'selected' : '' }}>07:00</option>
+				<option value="08:00" {{ $contrato->hora_inicial == '08:00' ? 'selected' : '' }}>08:00</option>
+				<option value="09:00" {{ $contrato->hora_inicial == '09:00' ? 'selected' : '' }}>09:00</option>
+				<option value="10:00" {{ $contrato->hora_inicial == '10:00' ? 'selected' : '' }}>10:00</option>
+				<option value="11:00" {{ $contrato->hora_inicial == '11:00' ? 'selected' : '' }}>11:00</option>
+				<option value="12:00" {{ $contrato->hora_inicial == '12:00' ? 'selected' : '' }}>12:00</option>
+				<option value="13:00" {{ $contrato->hora_inicial == '13:00' ? 'selected' : '' }}>13:00</option>
+				<option value="14:00" {{ $contrato->hora_inicial == '14:00' ? 'selected' : '' }}>14:00</option>
+				<option value="15:00" {{ $contrato->hora_inicial == '15:00' ? 'selected' : '' }}>15:00</option>
+				<option value="16:00" {{ $contrato->hora_inicial == '16:00' ? 'selected' : '' }}>16:00</option>
+				<option value="17:00" {{ $contrato->hora_inicial == '17:00' ? 'selected' : '' }}>17:00</option>
+				<option value="18:00" {{ $contrato->hora_inicial == '18:00' ? 'selected' : '' }}>18:00</option>
+				<option value="19:00" {{ $contrato->hora_inicial == '19:00' ? 'selected' : '' }}>19:00</option>
+				<option value="20:00" {{ $contrato->hora_inicial == '20:00' ? 'selected' : '' }}>20:00</option>
+				<option value="21:00" {{ $contrato->hora_inicial == '21:00' ? 'selected' : '' }}>21:00</option>
+				<option value="22:00" {{ $contrato->hora_inicial == '22:00' ? 'selected' : '' }}>22:00</option>
+				<option value="23:00" {{ $contrato->hora_inicial == '23:00' ? 'selected' : '' }}>23:00</option>
+				<option value="24:00" {{ $contrato->hora_inicial == '24:00' ? 'selected' : '' }}>24:00</option>
 			</select>
 		</td>
 	</tr>
@@ -123,32 +120,32 @@
 		</td>
 		<td>
 			<select name="hora_final">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="00:00" >00:00</option>
-				<option value="01:00" >01:00</option>
-				<option value="02:00" >02:00</option>
-				<option value="03:00" >03:00</option>
-				<option value="04:00" >04:00</option>
-				<option value="05:00" >05:00</option>
-				<option value="06:00" >06:00</option>
-				<option value="07:00" >07:00</option>
-				<option value="08:00" >08:00</option>
-				<option value="09:00" >09:00</option>
-				<option value="10:00" >10:00</option>
-				<option value="11:00" >11:00</option>
-				<option value="12:00" >12:00</option>
-				<option value="13:00" >13:00</option>
-				<option value="14:00" >14:00</option>
-				<option value="15:00" >15:00</option>
-				<option value="16:00" >16:00</option>
-				<option value="17:00" >17:00</option>
-				<option value="18:00" >18:00</option>
-				<option value="19:00" >19:00</option>
-				<option value="20:00" >20:00</option>
-				<option value="21:00" >21:00</option>
-				<option value="22:00" >22:00</option>
-				<option value="23:00" >23:00</option>
-				<option value="24:00" >24:00</option>
+				<option value="0" {{ $contrato->hora_final == '0' ? 'selected' : '' }}>Seleccione una opción</option>
+				<option value="00:00" {{ $contrato->hora_final == '00:00' ? 'selected' : '' }}>00:00</option>
+				<option value="01:00" {{ $contrato->hora_final == '01:00' ? 'selected' : '' }}>01:00</option>
+				<option value="02:00" {{ $contrato->hora_final == '02:00' ? 'selected' : '' }}>02:00</option>
+				<option value="03:00" {{ $contrato->hora_final == '03:00' ? 'selected' : '' }}>03:00</option>
+				<option value="04:00" {{ $contrato->hora_final == '04:00' ? 'selected' : '' }}>04:00</option>
+				<option value="05:00" {{ $contrato->hora_final == '05:00' ? 'selected' : '' }}>05:00</option>
+				<option value="06:00" {{ $contrato->hora_final == '06:00' ? 'selected' : '' }}>06:00</option>
+				<option value="07:00" {{ $contrato->hora_final == '07:00' ? 'selected' : '' }}>07:00</option>
+				<option value="08:00" {{ $contrato->hora_final == '08:00' ? 'selected' : '' }}>08:00</option>
+				<option value="09:00" {{ $contrato->hora_final == '09:00' ? 'selected' : '' }}>09:00</option>
+				<option value="10:00" {{ $contrato->hora_final == '10:00' ? 'selected' : '' }}>10:00</option>
+				<option value="11:00" {{ $contrato->hora_final == '11:00' ? 'selected' : '' }}>11:00</option>
+				<option value="12:00" {{ $contrato->hora_final == '12:00' ? 'selected' : '' }}>12:00</option>
+				<option value="13:00" {{ $contrato->hora_final == '13:00' ? 'selected' : '' }}>13:00</option>
+				<option value="14:00" {{ $contrato->hora_final == '14:00' ? 'selected' : '' }}>14:00</option>
+				<option value="15:00" {{ $contrato->hora_final == '15:00' ? 'selected' : '' }}>15:00</option>
+				<option value="16:00" {{ $contrato->hora_final == '16:00' ? 'selected' : '' }}>16:00</option>
+				<option value="17:00" {{ $contrato->hora_final == '17:00' ? 'selected' : '' }}>17:00</option>
+				<option value="18:00" {{ $contrato->hora_final == '18:00' ? 'selected' : '' }}>18:00</option>
+				<option value="19:00" {{ $contrato->hora_final == '19:00' ? 'selected' : '' }}>19:00</option>
+				<option value="20:00" {{ $contrato->hora_final == '20:00' ? 'selected' : '' }}>20:00</option>
+				<option value="21:00" {{ $contrato->hora_final == '21:00' ? 'selected' : '' }}>21:00</option>
+				<option value="22:00" {{ $contrato->hora_final == '22:00' ? 'selected' : '' }}>22:00</option>
+				<option value="23:00" {{ $contrato->hora_final == '23:00' ? 'selected' : '' }}>23:00</option>
+				<option value="24:00" {{ $contrato->hora_final == '24:00' ? 'selected' : '' }}>24:00</option>
 			</select>
 		</td>
 	</tr>
@@ -158,8 +155,8 @@
 		</td>
 		<td>
 			<select name="lugar_entrega">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="Oficina" >Oficina</option>
+				<option value="0" {{ $contrato->lugar_entrega == '0' ? 'selected' : '' }}>Seleccione una opción</option>
+				<option value="Oficina" {{ $contrato->lugar_entrega == 'Oficina' ? 'selected' : '' }}>Oficina</option>
 			</select>
 		</td>
 	</tr>
@@ -169,8 +166,8 @@
 		</td>
 		<td>
 			<select name="lugar_devolucion">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="Oficina" >Oficina</option>
+				<option value="0" {{ $contrato->lugar_devolucion == '0' ? 'selected' : '' }}>Seleccione una opción</option>
+				<option value="Oficina" {{ $contrato->lugar_devolucion == 'Oficina' ? 'selected' : '' }}>Oficina</option>
 			</select>
 		</td>
 	</tr>
@@ -228,8 +225,8 @@
 		</td>
 		<td>
 			<select name="hotel">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="hotels" >Hoteles</option>
+				<option value="0" {{ $contrato->hotel == '0' ? 'selected' : '' }}>Seleccione una opción</option>
+				<option value="hotels" {{ $contrato->hotel == 'hotels' ? 'selected' : '' }}>Hoteles</option>
 			</select>
 		</td>
 	</tr>
@@ -263,9 +260,9 @@
 		</td>
 		<td>
 			<select name="silla">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="Si" >Si</option>
-				<option value="No" >No</option>
+				<option value="0" {{ $contrato->silla == '0' ? 'selected' : '' }}>Seleccione una opción</option>
+				<option value="Si" {{ $contrato->silla == 'Si' ? 'selected' : '' }}>Si</option>
+				<option value="No" {{ $contrato->silla == 'No' ? 'selected' : '' }}>No</option>
 			</select>
 		</td>
 	</tr>
@@ -275,9 +272,9 @@
 		</td>
 		<td>
 			<select name="gps">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="Si" >Si</option>
-				<option value="No" >No</option>
+				<option value="0" {{ $contrato->gps == '0' ? 'selected' : '' }}>Seleccione una opción</option>
+				<option value="Si" {{ $contrato->gps == 'Si' ? 'selected' : '' }}>Si</option>
+				<option value="No" {{ $contrato->gps == 'No' ? 'selected' : '' }}>No</option>
 			</select>
 		</td>
 	</tr>

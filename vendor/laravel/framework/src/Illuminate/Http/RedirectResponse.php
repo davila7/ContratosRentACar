@@ -4,6 +4,7 @@ use Illuminate\Support\MessageBag;
 use Illuminate\Support\ViewErrorBag;
 use Symfony\Component\HttpFoundation\Cookie;
 use Illuminate\Session\Store as SessionStore;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Illuminate\Support\Contracts\MessageProviderInterface;
 
 class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectResponse {
@@ -28,7 +29,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	 * @param  string  $key
 	 * @param  string  $value
 	 * @param  bool  $replace
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return $this
 	 */
 	public function header($key, $value, $replace = true)
 	{
@@ -46,13 +47,11 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	 */
 	public function with($key, $value = null)
 	{
-		if (is_array($key))
+		$key = is_array($key) ? $key : [$key => $value];
+
+		foreach ($key as $k => $v)
 		{
-			foreach ($key as $k => $v) $this->with($k, $v);
-		}
-		else
-		{
-			$this->session->flash($key, $value);
+			$this->session->flash($k, $v);
 		}
 
 		return $this;
@@ -62,7 +61,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	 * Add a cookie to the response.
 	 *
 	 * @param  \Symfony\Component\HttpFoundation\Cookie  $cookie
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return $this
 	 */
 	public function withCookie(Cookie $cookie)
 	{
@@ -72,16 +71,17 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	}
 
 	/**
-	 * Flash an array of input to the session.
+	 * Add multiple cookies to the response.
 	 *
-	 * @param  array  $input
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @param  array  $cookie
+	 * @return $this
 	 */
-	public function withInput(array $input = null)
+	public function withCookies(array $cookies)
 	{
-		$input = $input ?: $this->request->input();
-
-		$this->session->flashInput($input);
+		foreach ($cookies as $cookie)
+		{
+			$this->headers->setCookie($cookie);
+		}
 
 		return $this;
 	}
@@ -89,8 +89,26 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	/**
 	 * Flash an array of input to the session.
 	 *
-	 * @param  dynamic  string
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @param  array  $input
+	 * @return $this
+	 */
+	public function withInput(array $input = null)
+	{
+		$input = $input ?: $this->request->input();
+
+		$this->session->flashInput(array_filter($input, function ($value)
+		{
+			return ! $value instanceof UploadedFile;
+		}));
+
+		return $this;
+	}
+
+	/**
+	 * Flash an array of input to the session.
+	 *
+	 * @param  mixed  string
+	 * @return $this
 	 */
 	public function onlyInput()
 	{
@@ -100,7 +118,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	/**
 	 * Flash an array of input to the session.
 	 *
-	 * @param  dynamic  string
+	 * @param  mixed  string
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function exceptInput()
@@ -113,7 +131,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	 *
 	 * @param  \Illuminate\Support\Contracts\MessageProviderInterface|array  $provider
 	 * @param  string  $key
-	 * @return \Illuminate\Http\RedirectResponse
+	 * @return $this
 	 */
 	public function withErrors($provider, $key = 'default')
 	{
@@ -138,10 +156,8 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 		{
 			return $provider->getMessageBag();
 		}
-		else
-		{
-			return new MessageBag((array) $provider);
-		}
+
+		return new MessageBag((array) $provider);
 	}
 
 	/**
@@ -178,7 +194,7 @@ class RedirectResponse extends \Symfony\Component\HttpFoundation\RedirectRespons
 	/**
 	 * Set the session store implementation.
 	 *
-	 * @param  \Illuminate\Session\Store  $store
+	 * @param  \Illuminate\Session\Store  $session
 	 * @return void
 	 */
 	public function setSession(SessionStore $session)

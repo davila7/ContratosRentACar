@@ -122,12 +122,18 @@ class ContratoController extends BaseController
         return View::make('contratos.detallecontrato')->with("contrato",$contrato);
     }
 
-    public function VerContratoPDF(){
+    public function VerContratoPDF($id){
+        header("Content-Type: application/pdf");
+        $pathfile = public_path().'/pdfs/'.$id.'.pdf';
 
-        
-
-
-
+            $contrato = Contrato::find($id);
+            $html = (string) View::make('contratos.contratopdf')->with("contrato",$contrato);
+            File::put($pathfile, PDF::load(utf8_decode($html), 'A5', 'landscape')->output());
+            return Response::make(file_get_contents($pathfile), 200, array('content-type'=>'application/pdf'));
     }
-
+            /* Mail::send('emails.pdf', $data, function($message) use ($pathfile){
+                $message->from('us@example.com', 'Laravel');
+                $message->to('you@example.com');
+                $message->attach($pathfile);
+            });*/
 }

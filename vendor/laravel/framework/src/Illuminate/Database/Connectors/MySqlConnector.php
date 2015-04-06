@@ -21,7 +21,7 @@ class MySqlConnector extends Connector implements ConnectorInterface {
 
 		if (isset($config['unix_socket']))
 		{
-			$connection->exec("use {$config['database']};");
+			$connection->exec("use `{$config['database']}`;");
 		}
 
 		$collation = $config['collation'];
@@ -48,14 +48,26 @@ class MySqlConnector extends Connector implements ConnectorInterface {
 	}
 
 	/**
-	 * Create a DSN string from a configuration.
+	 * Create a DSN string from a configuration. Chooses socket or host/port based on
+	 * the 'unix_socket' config value
 	 *
 	 * @param  array   $config
 	 * @return string
 	 */
 	protected function getDsn(array $config)
 	{
-		return isset($config['unix_socket']) ? $this->getSocketDsn($config) : $this->getHostDsn($config);
+		return $this->configHasSocket($config) ? $this->getSocketDsn($config) : $this->getHostDsn($config);
+	}
+
+	/**
+	 * Determine if the given configuration array has a UNIX socket value.
+	 *
+	 * @param  array  $config
+	 * @return bool
+	 */
+	protected function configHasSocket(array $config)
+	{
+		return isset($config['unix_socket']) && ! empty($config['unix_socket']);
 	}
 
 	/**
