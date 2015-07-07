@@ -17,6 +17,14 @@
 <table class="table table-hover">
 	<tr>
 		<td>
+			Nombre Rentacar
+		</td>
+		<td>
+			<input type="text" name="nombre_rentacar" placeholder="Ingresar Nombre" value="{{ $contrato->nombre_rentacar }}" required>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			Monto Garantía 
 		</td>
 		<td>
@@ -154,10 +162,7 @@
 			Lugar Entrega
 		</td>
 		<td>
-			<select name="lugar_entrega">
-				<option value="0" {{ $contrato->lugar_entrega == '0' ? 'selected' : '' }}>Seleccione una opción</option>
-				<option value="Oficina" {{ $contrato->lugar_entrega == 'Oficina' ? 'selected' : '' }}>Oficina</option>
-			</select>
+			<input type="text" name="lugar_entrega" value="{{ $contrato->lugar_entrega }}" placeholder="Lugar">
 		</td>
 	</tr>
 	<tr>
@@ -165,10 +170,7 @@
 			Lugar Devolución
 		</td>
 		<td>
-			<select name="lugar_devolucion">
-				<option value="0" {{ $contrato->lugar_devolucion == '0' ? 'selected' : '' }}>Seleccione una opción</option>
-				<option value="Oficina" {{ $contrato->lugar_devolucion == 'Oficina' ? 'selected' : '' }}>Oficina</option>
-			</select>
+			<input type="text" name="lugar_devolucion" value="{{ $contrato->lugar_devolucion }}" placeholder="Lugar">
 		</td>
 	</tr>
 	<tr>
@@ -224,10 +226,7 @@
 			Hotel 
 		</td>
 		<td>
-			<select name="hotel">
-				<option value="0" {{ $contrato->hotel == '0' ? 'selected' : '' }}>Seleccione una opción</option>
-				<option value="hotels" {{ $contrato->hotel == 'hotels' ? 'selected' : '' }}>Hoteles</option>
-			</select>
+			<input type="text" name="hotel" value="{{ $contrato->hotel }}"  placeholder="Ingresar hotel" required>
 		</td>
 	</tr>
 	<tr>

@@ -55,6 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
+			/*'database'  => 'u394291857_cont',
+			'username'  => 'u394291857_cont',
+			'password'  => 'mk73a9o3dani',*/
 			'database'  => 'rentacar',
 			'username'  => 'root',
 			'password'  => 'root',

@@ -22,7 +22,7 @@
       <span class="input-group-btn">
         <button id="btn_busca" class="btn btn-default" type="button">Buscar!</button>
       </span>
-      <input type="text" id="busca" value="{{ $busca }}" class="form-control" placeholder="Buscar por...">
+      <input type="text" id="busca" value="{{ $busca }}" class="form-control" placeholder="Buscar por cliente">
     </div><!-- /input-group -->
   </div><!-- /.col-lg-6 -->
   <!--<div class="col-lg-3">
@@ -84,6 +84,10 @@
         <td>
            <a href="VerContratoPDF/{{ $cont->id}}" class="btn btn-xs btn-info" title="Detalles">
             <i class="fa fa-check-square-o"></i>  Ver pdf </a>
+        </td>
+        <td>
+           <a href="EnviarContrato/{{ $cont->id}}" class="btn btn-xs btn-info" title="Enviar">
+            <i class="fa fa-check-square-o"></i>  Enviar Correo </a>
         </td>
         <td>
           <a href="EditarContrato/{{ $cont->id}}" class="btn btn-xs btn-warning" title="Editar">

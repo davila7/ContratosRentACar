@@ -18,6 +18,14 @@
 <table class="table table-hover">
 	<tr>
 		<td>
+			Nombre Rentacar
+		</td>
+		<td>
+			<input type="text" name="nombre_rentacar" placeholder="Ingresar Nombre" required>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			Monto Garantía 
 		</td>
 		<td>
@@ -155,10 +163,7 @@
 			Lugar Entrega
 		</td>
 		<td>
-			<select name="lugar_entrega">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="Oficina" >Oficina</option>
-			</select>
+			<input type="text" name="lugar_entrega" placeholder="Lugar Entrega" >
 		</td>
 	</tr>
 	<tr>
@@ -166,10 +171,7 @@
 			Lugar Devolución
 		</td>
 		<td>
-			<select name="lugar_devolucion">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="Oficina" >Oficina</option>
-			</select>
+			<input type="text" name="lugar_devolucion" placeholder="Lugar Entrega" >
 		</td>
 	</tr>
 	<tr>
@@ -225,10 +227,7 @@
 			Hotel 
 		</td>
 		<td>
-			<select name="hotel">
-				<option value="0" selected>Seleccione una opción</option>
-				<option value="hotels" >Hoteles</option>
-			</select>
+			<input type="text" name="hotel"  placeholder="Ingresar Hotel">
 		</td>
 	</tr>
 	<tr>
@@ -236,7 +235,7 @@
 			Conserje 
 		</td>
 		<td>
-			<input type="text" name="conserje"  placeholder="Ingresar Conserje" required>
+			<input type="text" name="conserje"  placeholder="Ingresar Conserje">
 		</td>
 	</tr>
 	<tr>
@@ -284,7 +283,7 @@
 			KM Inicial 
 		</td>
 		<td>
-			<input type="text" name="km_inicial"  placeholder="Ingresar KM" required>
+			<input type="text" name="km_inicial"  placeholder="Ingresar KM">
 		</td>
 	</tr>
 	<tr>
@@ -292,7 +291,7 @@
 			KM Final 
 		</td>
 		<td>
-			<input type="text" name="km_final"  placeholder="Ingresar KM" required>
+			<input type="text" name="km_final"  placeholder="Ingresar KM">
 		</td>
 	</tr>
 	<tr>

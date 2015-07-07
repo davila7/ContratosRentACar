@@ -63,6 +63,7 @@ Route::get('/EditarContrato/{id}','ContratoController@EditarContratoGet');
 Route::post('/EditarContrato','ContratoController@EditarContratoPost');
 
 Route::get('/VerContratoPDF/{id}','ContratoController@VerContratoPDF');
+Route::get('/EnviarContrato/{id}','ContratoController@EnviarContrato');
 
 
 

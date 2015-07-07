@@ -1,7 +1,7 @@
 <table border="1"  align="center" bgcolor="#C1BCBC">
 	<tr  align="center">
 		<td colspan="2">
-			Renta a Car
+			{{ $contrato->nombre_rentacar }}
 		</td>
 		<td colspan="2">
 			Contrato
@@ -138,7 +138,7 @@ coincidan con la prestación del servicio; debido a que el nuevo documento entre
 cancelación, no es aceptado como medio viable de pago, al ser rechazado por la
 garantizadora de cheques.</p>
 
-<p>Sin perjuicio de la anterior, podrá comunicarse con ATLAS para la devolución del mismo
+<p>Sin perjuicio de la anterior, podrá comunicarse con {{ $contrato->nombre_rentacar }} para la devolución del mismo
 en un logar distinto, pagando el costo de traslado. En caso que el vehiculo no sea
 devuelto el día y hora antes indicado, la renta diaria de arrendamiento, referida en la
 cláusula anterior, tendrá el siguiente recargo: atraso de una a seis horas recargo de 50%
@@ -146,7 +146,7 @@ por día. Mas IVA; de seis a veinticuatro horas de 100% por día. Mas IVA y así
 sucesivamente, hasta la devolución del vehiculo.</p>
 
 <p>En el caso que el arrendatario desee prorrogar el presente contrato, deberá obtener,
-personalmente o por correo electrónico, una autorización expresa de ATLAS y pagara el
+personalmente o por correo electrónico, una autorización expresa de {{ $contrato->nombre_rentacar }} y pagara el
 arrendamiento por el nmero de días que se haya convenido la prorroga entre las partes.
 Si el arrendatario no devuelve el auto en la fecha acordada y no da ninguna explicación
 verbal o por escrito, la arrendadora puede recuperar el vehiculo esté donde esté y sin
@@ -178,11 +178,11 @@ todas las pertenencias de valor del propietario y el panel desmóntenle de la ra
 vehículo, atendiendo que el seguro del vehiculo no cubre el robo de radio si no se entrega
 dicho panel a la compaa. El arrendador no se hará responsable por perdida o robo de
 cualquier tipo de equipaje o especies de se guarden en el vehiculo o que queden
-olvidadas al devolverlo o ser retirado por ATLAS;</p>
+olvidadas al devolverlo o ser retirado por {{ $contrato->nombre_rentacar }};</p>
 
 <p>En el caso que el vehiculo presente cualquier desperfecto mecánico o que afecte su
 funcionamiento, el arrendatario deberá abstenerse de efectuar reparaciones por su
-cuenta y deberá comunicarse con ATLAS, para poner a su disposición el vehiculo.</p>
+cuenta y deberá comunicarse con {{ $contrato->nombre_rentacar }}, para poner a su disposición el vehiculo.</p>
 
 <p>- El arrendatario deberá cancelar todas las multas e indemnizaciones a que sea
 condenada la arrendadora con motivo de las infracciones cometidas por el arrendatario,
@@ -214,14 +214,14 @@ correspondiente en Carabineros De Chile a la ocurrencia del siniestro, estando o
 además a remitir a la arrendataria el documento original de la constancia dentro de las
 primeras 24 horas de ocurrido el siniestro, con una declaración escrita acerca de los
 hechos domo ocurrió el accidente o siniestro. Asimismo, deberá prestar toda su
-colaboración a ATLAS y a la compaa de seguros, por todos los procesos judiciales que se
+colaboración a {{ $contrato->nombre_rentacar }} y a la compaa de seguros, por todos los procesos judiciales que se
 puedan iniciar con motivo del accidente o siniestro en que haya participado el vehiculo
 arrendado.</p>
 
 <p>En caso de incumplimiento o infracción a la obligación selada en el párrafo anterior, el
 arrendatario será responsable y tendrá que pagar los das, perjuicios y todos los demás
 gastos que ello irrogue a la arrendadora, como también, respecto a la compaa
-aseguradora de ATLAS o del tercero afectado.</p>
+aseguradora de {{ $contrato->nombre_rentacar }} o del tercero afectado.</p>
 
 <p>En caso de siniestro, el arrendatario se obligara a pagar el deducible a la póliza
 correspondiente hasta por in máximo UF 13.00 + IVA, por cada siniestro.</p>

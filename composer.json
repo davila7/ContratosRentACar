@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		"facebook/php-sdk-v4": "4.0.*",
-		"thujohn/pdf": "dev-master"
+		"thujohn/pdf": "dev-master",
+		"guzzlehttp/guzzle": "~4.0"
 	},
 	"autoload": {
 		"classmap": [

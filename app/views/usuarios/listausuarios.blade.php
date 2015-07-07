@@ -32,15 +32,6 @@ Missing/Lista de Usuarios
 			Permiso
 		</th>
 		<th>
-			Plan
-		</th>
-		<th>
-			Examenes
-		</th>
-		<th>
-			Ver Horario
-		</th>
-		<th>
 			Editar
 		</th>
 		<th>
@@ -62,15 +53,6 @@ Missing/Lista de Usuarios
 		</td>
 		<td>
 			{{ $user['permiso'] }}
-		</td>
-		<td>
-			{{ $user['plan'] }}
-		</td>
-		<td>
-			{{ HTML::link('ListaAlumnoExamenes/'.$user['id'],'Examenes',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
-		</td>
-		<td>
-			{{ HTML::link('HorarioUsuario/'.$user['id'],'Horario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}
 		</td>
 		<td>
 			{{ HTML::link('EditarUsuario/'.$user['id'],'Editar Usuario',array( 'type' => 'button', 'class' => 'btn btn-default')) }}

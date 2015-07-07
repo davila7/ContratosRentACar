@@ -88,23 +88,6 @@ CMA/Crear Usuario
 	</tr>
 	<tr>
 		<th>
-			Plan 
-		</th>
-		<th>
-			@if($planes != null)
-			<select name="plan">
-				<option value="0">Seleccione una opción</option>
-			@foreach($planes as $p)
-					<option value="{{$p->id}}">{{$p->nombre}}</option>
-    		@endforeach
-    		</select>
-			@else
-			No existen Planes
-			@endif
-		</th>
-	</tr>
-	<tr>
-		<th>
 			Passowrd
 		</th>
 		<th>

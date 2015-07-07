@@ -4,7 +4,7 @@ $(document).ready(function() {
 			var password = $('#password').val();
 			$.ajax({
 			type: "GET",
-			url: $('#baseurl').val()+"/LoginUsuario",
+			url: $('#baseurl').val()+"/LoginUsuario/",
 			data: { email : email, password : password },
 			success:function(data){
 				jsondata = eval(data);
@@ -16,9 +16,9 @@ $(document).ready(function() {
 					$('#alert-login').removeClass('hide');
 				}			
 			},
-			error:function (response){
-				error = eval(response);
-				alert('error '+error)
+			error: function(xhr, status, error) {
+				var err = eval("(" + xhr.responseText + ")");
+  				alert('error '+err.Message);
 			}
 			});
     });

@@ -10,10 +10,7 @@ class ContratoController extends BaseController
         if(!is_null($busca) && $busca != ""){
             $contratos = DB::table('contratos')
             ->where('es_valido', '=', 1 )
-            ->orWhere('cliente','LIKE', '%'.$busca.'%')
-            ->orWhere('codigo_garantia','LIKE', '%'.$busca.'%')
-            ->orWhere('marca','LIKE', '%'.$busca.'%')
-            ->orWhere('patente','LIKE', '%'.$busca.'%')
+            ->Where('cliente','LIKE', '%'.$busca.'%')
             ->get();
         }else{
             $contratos = DB::table('contratos')
@@ -31,6 +28,7 @@ class ContratoController extends BaseController
 
     public function CrearContratoPost(){
         $contra = new Contrato;
+        $contra->nombre_rentacar = Input::get("nombre_rentacar");
         $contra->monto_garantia = Input::get("monto_garantia");
         $contra->codigo_garantia = Input::get("codigo_garantia");
         $contra->fecha_vencimiento_tc = date("Y-m-d",strtotime(Input::get("fecha_vencimiento_tc")));
@@ -83,6 +81,7 @@ class ContratoController extends BaseController
 
     public function EditarContratoPost(){
         $contra = Contrato::find(Input::get("id"));
+        $contra->nombre_rentacar = Input::get("nombre_rentacar");
         $contra->monto_garantia = Input::get("monto_garantia");
         $contra->codigo_garantia = Input::get("codigo_garantia");
         $contra->fecha_vencimiento_tc = date("Y-m-d",strtotime(Input::get("fecha_vencimiento_tc")));
@@ -131,9 +130,24 @@ class ContratoController extends BaseController
             File::put($pathfile, PDF::load(utf8_decode($html), 'A5', 'landscape')->output());
             return Response::make(file_get_contents($pathfile), 200, array('content-type'=>'application/pdf'));
     }
-            /* Mail::send('emails.pdf', $data, function($message) use ($pathfile){
-                $message->from('us@example.com', 'Laravel');
-                $message->to('you@example.com');
-                $message->attach($pathfile);
-            });*/
+
+    public function EnviarContrato($id){
+        header("Content-Type: application/pdf");
+        $pathfile = public_path().'/pdfs/'.$id.'.pdf';
+        $contrato = Contrato::find($id);
+        $html = (string) View::make('contratos.contratopdf')->with("contrato",$contrato);
+        File::put($pathfile, PDF::load(utf8_decode($html), 'A5', 'landscape')->output());
+        $data = array(
+            'pathfile' => $pathfile
+            );
+                
+        //$emails = array('dan.avila7@gmail.com', 'pa.lobos.a@gmail.com', 'crvergaraf@gmail.com', 'diego.duoc@gmail.com');
+        $emails = array('dan.avila7@gmail.com');
+        $test = 'test';
+       /* Mail::send('emails.contrato', $data, function($message) use ($emails, $test){
+            $message->from('contacto@easyrentacar.cl', 'Easy Rent a Car');
+            $message->attach(Swift_Attachment::fromPath($pathfile));
+            $message->to($emails, 'test')->subject('Nuevo Contrato');
+        });*/
+    }
 }
