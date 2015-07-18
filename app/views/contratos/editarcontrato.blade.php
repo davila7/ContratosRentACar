@@ -20,7 +20,12 @@
 			Nombre Rentacar
 		</td>
 		<td>
-			<input type="text" name="nombre_rentacar" placeholder="Ingresar Nombre" value="{{ $contrato->nombre_rentacar }}" required>
+			<select name="nombre_rentacar">
+				<option value="Sin Empresa" {{ $contrato->nombre_rentacar == 'Sin Empresa' ? 'selected' : '' }}>Seleccione una opción</option>
+				<option value="Easy Rent a Car" {{ $contrato->nombre_rentacar == 'Easy Rent a Car' ? 'selected' : '' }}>Easy Rent a Car</option>
+				<option value="Atlas Rent a Car" {{ $contrato->nombre_rentacar == 'Atlas Rent a Car' ? 'selected' : '' }}>Atlas Rent a Car</option>
+				<option value="Free Rent a Car" {{ $contrato->nombre_rentacar == 'Free Rent a Car' ? 'selected' : '' }}>Free Rent a Car</option>
+			</select>
 		</td>
 	</tr>
 	<tr>

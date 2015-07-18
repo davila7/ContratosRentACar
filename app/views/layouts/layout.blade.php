@@ -6,7 +6,7 @@
 <!--[if (gt IE 9)|!(IE)]><html lang="en" class="no-js"><![endif]-->
 <html>
 <head>
-<title>Rentacar @if (Auth::check()) | {{Auth::user()->usuario}} @endif</title>
+<title>Easy Rent a Car @if (Auth::check()) | {{Auth::user()->usuario}} @endif</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,37 +18,34 @@
   
   {{ HTML::script('js/lib/jquery.js') }}
   {{ HTML::script('js/lib/jquery-ui.min.js') }}
-  {{ HTML::script('js/lib/jquery.validate.js') }}
-  {{ HTML::script('js/lib/additional-methods.min.js') }}
   {{ HTML::script('js/functions/index.js') }}
-  {{ HTML::script('js/lib/underscore.js') }}
   {{ HTML::script('js/lib/bootstrap.js') }}
   {{ HTML::script('js/lib/jasny-bootstrap.min.js') }}
   {{ HTML::script('js/lib/bootstrap-datepicker.js') }}
   {{ HTML::script('js/lib/bootstrap-fileupload.js') }}
   {{ HTML::script('js/lib/jquery.signaturepad.min.js') }}
-  {{ HTML::script('js/lib/json2.min.js') }}
 
   <!-- CSS -->
   {{ HTML::style('css/jasny-bootstrap.min.css'); }}
   {{ HTML::style('css/jquery.signaturepad.css'); }}
-  {{ HTML::style('css/marker.css'); }}
-  {{ HTML::style('css/font-awesome-4.2.0/css/font-awesome.css'); }}
   <!--{{ HTML::style('css/jquery.mobile.css'); }}-->
   {{ HTML::style('css/home.css'); }}
-  {{ HTML::style('css/bootstrap.css'); }}
   {{ HTML::style('css/docs.min.css'); }}
-  {{ HTML::style('css/datepicker.css'); }}
-  {{ HTML::style('css/bootstrap-responsive.css'); }}
-  {{ HTML::style('css/bootstrap-fileupload.css'); }}
+
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+
+  {{ Rapyd::styles() }}
 
 <!-- script especiales -->
   {{ HTML::script('js/functions/general.js') }}
   @yield('head')
 </head>
     <body>
+    {{ Rapyd::scripts() }}
       <input type="hidden" id="baseurl" value="{{ URL::to('/');}}" />
         <div class="container">
+        <a href="/index"><img src="{{  asset('img/logo_EASY.png') }}" width="200" height="100" /></a>
             @yield('content')
         </div>
     </body>

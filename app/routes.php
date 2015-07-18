@@ -44,13 +44,11 @@ Route::post('/CrearUsuario','UsuarioController@CrearUsuarioPost');
 Route::get('/BorrarUsuario/{usuario_id}','UsuarioController@BorrarUsuarioGet');
 Route::get('/EditarUsuario/{usuario_id}','UsuarioController@EditarUsuarioGet');
 Route::post('/EditarUsuario','UsuarioController@EditarUsuarioPost');
-Route::get('/HorarioUsuario/{usuario_id}','UsuarioController@HorarioUsuarioGet');
-Route::get('/GuardaHorario','UsuarioController@GuardaHorarioUsuarioGet');
-Route::get('/BorrarHorario','UsuarioController@BorrarHorarioGet');
-Route::get('/ListaAlumnoExamenes/{user_id}','UsuarioController@ListaAlumnoExamenesGet');
-Route::get('/AgregarExamenAlumno/{id_examen}/{id_usuario}','UsuarioController@AgregarExamenAlumnoGet');
-Route::get('/QuitarExamenAlumno/{id_examen}/{id_usuario}','UsuarioController@QuitarExamenAlumnoGet');
 
+
+//GASTOS
+Route::get('/ListaGastos','ErpController@ListaGastos');
+Route::any('/gastos/edit','ErpController@CrudGastos');
 
 
 //CONTRATOS

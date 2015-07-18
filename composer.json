@@ -7,7 +7,8 @@
 		"laravel/framework": "4.2.*",
 		"facebook/php-sdk-v4": "4.0.*",
 		"thujohn/pdf": "dev-master",
-		"guzzlehttp/guzzle": "~4.0"
+		"guzzlehttp/guzzle": "~4.0",
+		"zofe/rapyd": "1.3.*"
 	},
 	"autoload": {
 		"classmap": [

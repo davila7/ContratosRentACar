@@ -49,6 +49,7 @@
       <div class="col-lg-12 col-lg-offset-4">
         <div class="col-lg-3">
           <p class="bg-success">Iniciar Sesión</p>
+          <img src="{{  asset('img/logo_EASY.png') }}" width="200" height="100" />
           <div class="form-group">
             <label>Email</label>
             <input type="email" name="email" id="email" class="form-control" placeholder="Ingresar email">
@@ -57,7 +58,7 @@
             <label>Password</label>
             <input type="password" name="password" id="password" class="form-control" placeholder="Ingresar Password">
           </div>
-          <button type="button" id="login" class="btn btn-default">Submit</button>
+          <button type="button" id="login" class="btn btn-default">Entrar</button>
         <div class="alert alert-danger hide" id="alert-login" role="alert">Usuario y contraseña incorrecto. Vuelva a intentarlo</div>
       </div>
       </div>

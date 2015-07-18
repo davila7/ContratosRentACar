@@ -1,106 +1,119 @@
+	@if($contrato->nombre_retacar != 'Easy Rent a Car')
+		<img src="{{  asset('img/logo_EASY.png') }}" width="200" height="100" />
+	@endif
 <table border="1"  align="center" bgcolor="#C1BCBC">
 	<tr  align="center">
-		<td colspan="2">
+		<th colspan="2">
 			{{ $contrato->nombre_rentacar }}
-		</td>
+		</th>
 		<td colspan="2">
 			Contrato
 			{{ $contrato->id }}321
 		</td>
 	</tr>
 	<tr align="center">
-		<td>
+		<th>
 			Vehiculo
-		</td>
+		</th>
 		<td colspan="3"  align="center">
 			{{ $contrato->marca }} {{ $contrato->modelo }} {{ $contrato->patente }}
 		</td>
 	</tr>
 	<tr align="center">
-		<td>
+		<th>
 			Fecha Inicio
-		</td>
+		</th>
 		<td>
 			{{ $contrato->fecha_inicial }}
 		</td>
-		<td>
+		<th>
 			Fecha Fin
-		</td>
+		</th>
 		<td>
 			{{ $contrato->fecha_final }}
 		</td>
 	</tr>
 	<tr align="center">
-		<td>
+		<th>
 			Kms Inicial
-		</td>
+		</th>
 		<td>
 			{{ $contrato->km_inicial }}
 		</td>
-		<td>
+		<th>
 			Kms Final
-		</td>
+		</th>
 		<td>
 			{{ $contrato->km_final }}
 		</td>
 	</tr>
 	<tr align="center">
-		<td>
+		<th>
 			Garantía 
-		</td>
+		</th>
 		<td colspan="3" >
 			$ {{ $contrato->monto_garantia }}
 		</td>
 	</tr>
 	<tr align="center">
-		<td colspan="4">
+		<th colspan="4">
 			Precio Incluye
-		</td>
+		</th>
 	</tr>
 	<tr align="center">
-		<td colspan="3">
+		<th colspan="3">
 			Deducible: 
-		</td>
+		</th>
 		<td>
 			$ {{ $contrato->deducible }}
 		</td>
 	</tr>
 	<tr align="center">
-		<td>
+		<th>
 			Silla
-		</td>
+		</th>
 		<td>
 			{{ $contrato->silla }}
 		</td>
-		<td>
+		<th>
 			GPS
-		</td>
+		</th>
 		<td>
 			{{ $contrato->gps }}
 		</td>
 	</tr>
 	<tr align="center">
-		<td>
+		<th>
 			Lugar Entrega
-		</td>
+		</th>
 		<td>
 			{{ $contrato->lugar_entrega }}
 		</td>
-		<td>
+		<th>
 			Lugar Devolución
-		</td>
+		</th>
 		<td>
 			{{ $contrato->lugar_devolucion }}
 		</td>
 	</tr>
 	<tr align="center">
-		<td colspan="4">
+		<th colspan="4">
 			Dirección
-		</td>
+		</th>
 	</tr>
 	<tr align="center">
 		<td colspan="4">
 			{{ $contrato->domicilio }}
+		</td>
+	</tr>
+	<tr align="center">
+		<th colspan="4">
+			Cliente
+		</th>
+	</tr>
+	<tr align="center">
+		<td colspan="4">
+			{{ $contrato->cliente }}
 		</td>
 	</tr>
 </table>

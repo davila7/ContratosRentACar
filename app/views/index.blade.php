@@ -20,6 +20,11 @@
        <h4 class='text-primary'>Bienvenido <strong>@if (Auth::check()) {{Auth::user()->nombre}} @endif</strong></h4>
       </td>
     </tr>
+      <tr>
+      <td>
+        <a href="ListaGastos" class="btn btn-default" alt="Contrato"><i class="fa fa fa-money"></i> Gastos</a>
+      </td>
+    </tr>
   <tr>
       <td>
         <a href="CrearContrato" class="btn btn-default" alt="Contrato"><i class="fa fa fa-file-text"></i> Crear Contrato</a>

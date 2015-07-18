@@ -1,0 +1,28 @@
+{
+    "name": "zofe/rapyd",
+    "description": "crud widgets for laravel 4, to make an admin in few lines of code",
+    "homepage": "https://github.com/zofe/rapyd-laravel",
+    "keywords": ["laravel", "crud", "rapyd", "administrator", "admin", "backend", "datatable", "form"],
+    "authors": [
+        {
+            "name": "zofe",
+            "email": "felice.ostuni@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "~4.1",
+        "intervention/image": "2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations",
+            "src/controllers",
+            "src/models"
+        ],
+        "psr-0": {
+            "Zofe\\Rapyd\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

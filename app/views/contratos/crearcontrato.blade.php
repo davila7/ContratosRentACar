@@ -21,7 +21,12 @@
 			Nombre Rentacar
 		</td>
 		<td>
-			<input type="text" name="nombre_rentacar" placeholder="Ingresar Nombre" required>
+			<select name="nombre_rentacar">
+				<option value="Sin Empresa" selected>Seleccione una opción</option>
+				<option value="Easy Rent a Car" >Easy Rent a Car</option>
+				<option value="Atlas Rent a Car" >Atlas Rent a Car</option>
+				<option value="Free Rent a Car" >Free Rent a Car</option>
+			</select>
 		</td>
 	</tr>
 	<tr>
